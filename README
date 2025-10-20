@@ -12,3 +12,5 @@ Iniciar un proyecto
 10- npx tailwindcss-cli@latest init -p
 11- npm install -D @tailwindcss/postcss
 
+Inyeccion del primer index sin distribuir el ccs y javascript
+
