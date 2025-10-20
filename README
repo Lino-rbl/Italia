@@ -1,0 +1,14 @@
+Iniciar un proyecto
+
+1- npm create vite@latest
+2- npm install
+3- npm install -D tailwindcss postcss autoprefixer
+4- npx tailwindcss init -p
+5- npx tailwindcss-cli@latest init -p
+6- npm install -D tailwindcss postcss autoprefixer
+7- npx tailwindcss init -p   
+8- npx tailwindcss-cli@latest init -p
+9- npx tailwindcss init -p   
+10- npx tailwindcss-cli@latest init -p
+11- npm install -D @tailwindcss/postcss
+
