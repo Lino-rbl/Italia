@@ -482,7 +482,7 @@
  * Contenedor de los botones de navegación (anterior/siguiente)
  * Se posiciona debajo del carousel
  */
-        .carousel-controls {
+.carousel-controls {
     position: absolute;             /* Posicionamiento absoluto respecto a .botones */
     top: 100%;                      /* Comienza justo debajo del carousel */
     width: 100%;                    /* Ancho completo del contenedor padre */
@@ -496,7 +496,7 @@
  * Botones individuales de navegación (‹ y ›)
  * Estilo circular con efectos hover
  */
-        .carousel-btn {
+.carousel-btn {
     background: rgba(255,255,255,0.9); /* Fondo blanco con 90% de opacidad */
     border: none;                   /* Sin borde */
     width: 50px;                    /* Ancho fijo de 50px */
@@ -513,7 +513,7 @@
  * Estado hover de los botones de navegación
  * Cambia color y tamaño al pasar el mouse
  */
-        .carousel-btn:hover {
+.carousel-btn:hover {
     background: #009246;            /* Fondo verde italiano */
     color: white;                   /* Texto blanco */
     transform: scale(1.2);          /* Aumenta el tamaño 10% */
@@ -523,16 +523,16 @@
  * Contenedor de los indicadores de posición (puntos)
  * Se centra debajo del carousel
  */
-        .carousel-indicators {
+.carousel-indicators {
     text-align: center;             /* Centra los indicadores horizontalmente */
     margin-top: 30px;               /* Espacio superior de 30px */
-        }
+}
 
 /* 
  * Indicadores individuales (puntos que muestran la posición actual)
  * Estado normal (inactivo)
  */
-        .indicator {
+.indicator {
     display: inline-block;          /* Permite alineación horizontal */
     width: 12px;                    /* Ancho de 12px */
     height: 12px;                   /* Altura de 12px */
@@ -571,10 +571,10 @@
  * Contenedor principal de la sección de cultura
  * Limita el ancho máximo y centra el contenido
  */
-        .culture-container {
+.culture-container {
     max-width: 1200px;              /* Ancho máximo de 1200px */
     margin: 0 auto;                 /* Centrado horizontalmente */
-        }
+}
 
 /* 
  * Encabezado de la sección de cultura
@@ -950,19 +950,19 @@
  * Pantallas de 1200px o más de ancho
  */
 @media (min-width: 1200px) {
-    .carousel-item {
-        height: 700px;              /* Altura mayor para pantallas grandes (700px) */
-    }
+.carousel-item {
+    height: 700px;              /* Altura mayor para pantallas grandes (700px) */
+}
     
-    .carousel-item video {
-        width: 100%;                /* Ancho completo del slide */
-        height: 100%;               /* Altura completa del slide */
-    }
+.carousel-item video {
+    width: 100%;                /* Ancho completo del slide */
+    height: 100%;               /* Altura completa del slide */
+}
     
-    .tower-container-1,
-    .tower-container-2 {
-        width: 150px;               /* Imágenes más grandes en pantallas grandes */
-        height: 150px;              /* Imágenes más grandes en pantallas grandes */
+.tower-container-1,
+.tower-container-2 {
+    width: 200px;               /* Imágenes más grandes en pantallas grandes */
+    height: 200px;              /* Imágenes más grandes en pantallas grandes */
     }
 }
 
