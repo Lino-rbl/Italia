@@ -7,7 +7,6 @@ let totalSlides: number;
 let carousel: HTMLElement | null;
 let indicatorsContainer: HTMLElement | null;
 let indicators: NodeListOf<Element>;
-let autoAdvanceInterval: number | null = null;
 
 // INICIALIZACIÓN DEL CAROUSEL
 function initCarousel() {
@@ -33,8 +32,6 @@ function initCarousel() {
 
     indicators = document.querySelectorAll('.indicator');
     
-    // Iniciar auto-avance
-    startAutoAdvance();
 }
 
 // ACTUALIZACIÓN VISUAL DEL CAROUSEL
@@ -69,23 +66,8 @@ function goToSlide(index: number) {
     restartAutoAdvance(); // Reiniciar auto-avance al navegar manualmente
 }
 
-// AUTO-AVANCE DEL CAROUSEL CADA 5 SEGUNDOS
-function startAutoAdvance() {
-    stopAutoAdvance(); // Asegurar que no hay intervalos duplicados
-    autoAdvanceInterval = window.setInterval(() => {
-        nextSlide();
-    }, 5000); // 5 segundos
-}
-
-function stopAutoAdvance() {
-    if (autoAdvanceInterval) {
-        clearInterval(autoAdvanceInterval);
-        autoAdvanceInterval = null;
-    }
-}
 
 function restartAutoAdvance() {
-    startAutoAdvance();
 }
 
 // SCROLL SUAVE AL HACER CLIC EN EL INDICADOR
@@ -121,18 +103,6 @@ function initCultureCards() {
     });
 }
 
-// EFECTO PARALLAX EN LA TORRE DE PISA AL HACER SCROLL
-function initParallax() {
-    window.addEventListener('scroll', () => {
-        const tower = document.querySelector('.tower-container');
-        if (tower) {
-            const scrollY = window.scrollY;
-            (tower as HTMLElement).style.transform = `translateY(${scrollY * 0.2}px) rotate(4deg)`; // Movimiento parallax
-            (tower as HTMLElement).style.opacity = Math.max(1 - scrollY / 600, 0).toString(); // Desvanecimiento progresivo
-        }
-    });
-}
-
 // HACER LAS FUNCIONES GLOBALES PARA ACCESO DESDE HTML
 (window as any).nextSlide = nextSlide;
 (window as any).prevSlide = prevSlide;
@@ -142,7 +112,6 @@ function initParallax() {
 document.addEventListener('DOMContentLoaded', () => {
     initCarousel();
     initCultureCards();
-    initParallax();
 });
 
 // También inicializar inmediatamente por si el DOM ya está listo
@@ -152,5 +121,4 @@ if (document.readyState === 'loading') {
     // DOM ya está listo
     initCarousel();
     initCultureCards();
-    initParallax();
 }

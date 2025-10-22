@@ -1,16 +1,69 @@
-Iniciar un proyecto
+## Discover Italy — La Dolce Vita
 
-1- npm create vite@latest
-2- npm install
-3- npm install -D tailwindcss postcss autoprefixer
-4- npx tailwindcss init -p
-5- npx tailwindcss-cli@latest init -p
-6- npm install -D tailwindcss postcss autoprefixer
-7- npx tailwindcss init -p   
-8- npx tailwindcss-cli@latest init -p
-9- npx tailwindcss init -p   
-10- npx tailwindcss-cli@latest init -p
-11- npm install -D @tailwindcss/postcss
+Sitio estático construido con Vite + TypeScript que presenta Italia con:
+- Hero con imagen de la Torre de Pisa y llamada “La Dolce Vita Awaits”.
+- Carrusel de destinos (Venecia, Roma, Costa Amalfitana, Florencia) con controles e indicadores.
+- Sección de cultura con tarjetas animadas al hacer scroll.
+- Despliegue automático a GitHub Pages mediante GitHub Actions.
 
-Inyeccion del primer index sin distribuir el ccs y javascript
+**Stack**
+- `Vite` (bundler y dev server)
+- `TypeScript`
+- `Tailwind CSS` (configurado; la mayoría de estilos actuales están en CSS clásico)
+- `PostCSS` + `autoprefixer`
+- `GitHub Actions` para deploy (usa Bun en CI)
+
+**Estructura**
+- `index.html`: página principal con hero, carrusel y sección de cultura.
+- `src/main.ts`: lógica del carrusel, indicadores y animaciones con IntersectionObserver.
+- `src/style.css`: estilos principales (hero, carrusel, cultura, footer, etc.).
+- `public/`: assets estáticos servidos por Vite (por ejemplo `public/image.png`).
+- `vite.config.js`: configura `base` para GitHub Pages y la entrada `index.html`.
+- `.github/workflows/deploy.yml`: build y deploy a GitHub Pages.
+
+**Requisitos**
+- Node 18+ (o Bun si prefieres). El proyecto incluye `package-lock.json`, así que los comandos de ejemplo usan `npm`.
+
+**Desarrollo**
+- Instalar dependencias: `npm install`
+- Ejecutar en modo dev: `npm run dev`
+  - Abre la URL que muestra Vite en la consola.
+
+**Build y preview**
+- Build de producción: `npm run build`
+- Previsualización local: `npm run preview`
+- Salida en `dist/`.
+
+**Despliegue (GitHub Pages)**
+- El workflow `.github/workflows/deploy.yml`:
+  - Se ejecuta en cada push a `main` (o manual con `workflow_dispatch`).
+  - Usa Bun para `install` y `build` y publica `./dist` en Pages.
+- `vite.config.js` ajusta `base` automáticamente para repos de Pages usando `GITHUB_REPOSITORY`.
+
+**Assets**
+- Coloca archivos estáticos en `public/` y refiérelos en HTML como `/<archivo>` para respetar la `base` en Pages.
+  - Ejemplo: `public/image.png` → usar `/image.png`.
+  - Revisa referencias como `/ital.mp4`, `/colosseum.jpg`, etc., y asegúrate de que existan en `public/`.
+
+**Carrusel**
+- HTML: elementos `.carousel-item` dentro de `#carousel`; indicadores en `#indicators`.
+- Funciones globales: `nextSlide()`, `prevSlide()`, `goToSlide(index)`.
+- Auto‑avance: `restartAutoAdvance()` está vacía; añade un `setInterval` si quieres rotación automática.
+
+**Tailwind**
+- Tailwind está configurado (`tailwind.config.js`, `postcss.config.js`), pero los estilos actuales viven en `src/style.css`.
+- Puedes migrar estilos a utilidades de Tailwind gradualmente si lo deseas.
+
+**Mejoras recomendadas**
+- Codificación de caracteres: hay símbolos y acentos corruptos en comentarios/textos (mojibake). Guarda los archivos como UTF‑8 y corrige caracteres (flechas, comillas, acentos) para una visualización correcta.
+- Accesibilidad: añade `alt` descriptivos, foco visible en controles del carrusel, roles/aria apropiados.
+- Recursos multimedia: confirma que todos los archivos referenciados existen en `public/` y usan rutas absolutas (`/...`).
+
+**Scripts**
+- `dev`: `vite`
+- `build`: `tsc && vite build`
+- `preview`: `vite preview`
+
+**Licencia**
+- No especificada. Añade una licencia si planeas distribuir públicamente.
 
