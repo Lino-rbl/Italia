@@ -105,6 +105,38 @@ function initCultureCards() {
     });
 }
 
+// FUNCIONALIDAD DE LA NAVBAR
+function initNavbar() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    // Toggle del menú móvil
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+
+        // Cerrar menú al hacer clic fuera de él
+        document.addEventListener('click', (e) => {
+            const target = e.target as Element;
+            if (!target.closest('.navbar')) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            }
+        });
+    }
+}
+
 // HACER LAS FUNCIONES GLOBALES PARA ACCESO DESDE HTML
 (window as any).nextSlide = nextSlide;
 (window as any).prevSlide = prevSlide;
@@ -112,6 +144,7 @@ function initCultureCards() {
 
 // INICIALIZACIÓN CUANDO EL DOM ESTÉ LISTO
 document.addEventListener('DOMContentLoaded', () => {
+    initNavbar();
     initCarousel();
     initCultureCards();
 });
@@ -121,6 +154,7 @@ if (document.readyState === 'loading') {
     // DOM aún cargando, el event listener se ejecutará
 } else {
     // DOM ya está listo
+    initNavbar();
     initCarousel();
     initCultureCards();
 }

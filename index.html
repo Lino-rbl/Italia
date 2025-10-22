@@ -10,23 +10,58 @@
 </head>
 <body>
     <!-- ========================================== -->
+    <!-- NAVIGATION BAR - Barra de navegación superior -->
+    <!-- ========================================== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo/Título del sitio -->
+            <div class="nav-logo">
+                <h2>🇮🇹 Discover Italy</h2>
+            </div>
+            
+            <!-- Menú de navegación -->
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#gallery" class="nav-link">Galería</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#culture" class="nav-link">Cultura</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contacto</a>
+                </li>
+            </ul>
+            
+            <!-- Botón hamburguesa para móviles -->
+            <div class="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========================================== -->
     <!-- HERO SECTION - Sección principal de la página -->
     <!-- ========================================== -->
-    <section class="hero">
-        <!-- Imagen decorativa en esquina superior izquierda -->
-        <div class="tower-container-1">
-            <img src="/img.jpg" class="tower-image" alt="Imagen decorativa Italia">
-        </div>
-
+    <section class="hero" id="home">
         <!-- Contenido principal del hero -->
         <div class="hero-content">
             <h1>Discover Italy</h1>
             <p><strong>La Dolce Vita Awaits</strong></p>
         </div>
 
-        <!-- Imagen decorativa en esquina inferior derecha -->
-        <div class="tower-container-2">
-            <img src="/image.png" alt="Leaning Tower of Pisa" class="tower-image">
+        <!-- Contenedor de imágenes decorativas debajo del título -->
+        <div class="hero-images-container">
+            <div class="tower-container-1">
+                <img src="/img.jpg" class="tower-image" alt="Imagen decorativa Italia">
+            </div>
+            <div class="tower-container-2">
+                <img src="/image.png" alt="Leaning Tower of Pisa" class="tower-image">
+            </div>
         </div>
 
         <!-- Indicador de scroll animado -->
@@ -36,7 +71,7 @@
     <!-- ========================================== -->
     <!-- CAROUSEL SECTION - Galería deslizante de videos -->
     <!-- ========================================== -->
-    <section class="carousel-section">
+    <section class="carousel-section" id="gallery">
         <h2>Beauty of Italy</h2>
         
         <!-- Contenedor principal del carousel -->
@@ -116,7 +151,7 @@
     <!-- ========================================== -->
     <!-- CULTURE SECTION - Sección sobre cultura italiana -->
     <!-- ========================================== -->
-    <section class="culture-section">
+    <section class="culture-section" id="culture">
         <div class="culture-container">
             <!-- Encabezado de la sección -->
             <div class="culture-header">
@@ -153,7 +188,7 @@
     <!-- ========================================== -->
     <!-- FOOTER - Pie de página con información del equipo -->
     <!-- ========================================== -->
-    <footer>
+    <footer id="contact">
         <div class="footer-container">
             <!-- Lema del sitio -->
             <p class="footer-tagline">"La Dolce Vita — Vive, Ama y Disfruta"</p>

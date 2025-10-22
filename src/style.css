@@ -17,7 +17,7 @@
  * Configuración base del elemento body
  * Define la tipografía, colores y fondo principal de toda la página
  */
-body {
+        body {
     font-family: 'Georgia', serif;    /* Fuente serif elegante para el texto */
     overflow-x: hidden;               /* Previene el scroll horizontal no deseado */
     color: #333;                      /* Color de texto principal (gris oscuro) */
@@ -26,7 +26,158 @@ body {
      * Verde (#009246) -> Blanco (#fff) -> Rojo (#ce2b37)
      * Se extiende de izquierda a derecha en toda la página
      */
-    background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
+            background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
+        }
+
+/* ========================================== */
+/* NAVIGATION BAR - Barra de navegación superior */
+/* ========================================== */
+
+/* 
+ * Barra de navegación principal
+ * Se mantiene fija en la parte superior de la página
+ */
+.navbar {
+    position: fixed;                /* Posición fija para que siempre esté visible */
+    top: 0;                         /* Pegado a la parte superior */
+    left: 0;                        /* Pegado a la parte izquierda */
+    width: 100%;                    /* Ancho completo de la pantalla */
+    background: rgba(255, 255, 255, 0.95); /* Fondo blanco con 95% de opacidad */
+    backdrop-filter: blur(10px);    /* Efecto de desenfoque de fondo */
+    border-bottom: 2px solid rgba(0, 146, 70, 0.2); /* Línea inferior verde sutil */
+    z-index: 1000;                  /* Por encima de todos los demás elementos */
+    transition: all 0.3s ease;      /* Transición suave de 0.3s para cambios */
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* 
+ * Contenedor principal de la navegación
+ * Organiza el logo, menú y botón hamburguesa
+ */
+.nav-container {
+    max-width: 1200px;              /* Ancho máximo de 1200px */
+    margin: 0 auto;                 /* Centrado horizontalmente */
+    padding: 0 20px;                /* Padding horizontal de 20px */
+    display: flex;                  /* Activa flexbox para alineación horizontal */
+    justify-content: space-between; /* Distribuye elementos en extremos opuestos */
+    align-items: center;            /* Centra verticalmente todos los elementos */
+    height: 70px;                   /* Altura fija de 70px */
+}
+
+/* 
+ * Logo/Título del sitio
+ * Contiene el emoji de la bandera italiana y el texto
+ */
+.nav-logo h2 {
+    font-size: 1.8rem;              /* Tamaño de fuente grande (28.8px) */
+    color: #009246;                 /* Verde italiano */
+    margin: 0;                      /* Sin márgenes */
+    font-weight: bold;              /* Texto en negrita */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra de texto sutil */
+}
+
+/* 
+ * Lista del menú de navegación
+ * Contiene todos los enlaces de navegación
+ */
+.nav-menu {
+    display: flex;                  /* Activa flexbox para alineación horizontal */
+    list-style: none;               /* Elimina las viñetas de la lista */
+    margin: 0;                      /* Sin márgenes */
+    padding: 0;                     /* Sin padding */
+    gap: 40px;                      /* Espacio de 40px entre elementos */
+}
+
+/* 
+ * Elementos individuales del menú
+ * Cada enlace de navegación
+ */
+.nav-item {
+    position: relative;             /* Permite posicionamiento del pseudo-elemento */
+}
+
+/* 
+ * Enlaces de navegación
+ * Estilos para cada enlace del menú
+ */
+.nav-link {
+    text-decoration: none;          /* Elimina la línea de subrayado */
+    color: #333;                    /* Color de texto gris oscuro */
+    font-size: 1.1rem;              /* Tamaño de fuente mediano (17.6px) */
+    font-weight: 500;               /* Peso de fuente medio */
+    padding: 10px 15px;             /* Padding de 10px vertical, 15px horizontal */
+    border-radius: 8px;             /* Esquinas redondeadas de 8px */
+    transition: all 0.3s ease;      /* Transición suave de 0.3s */
+    position: relative;             /* Permite posicionamiento del pseudo-elemento */
+}
+
+/* 
+ * Pseudo-elemento que crea la línea inferior de los enlaces
+ * Aparece al hacer hover
+ */
+.nav-link::after {
+    content: '';                    /* Crea un elemento vacío */
+    position: absolute;             /* Posicionamiento absoluto respecto al enlace */
+    bottom: 0;                      /* Pegado a la parte inferior */
+    left: 50%;                      /* Centrado horizontalmente */
+    width: 0;                       /* Inicialmente sin ancho */
+    height: 3px;                    /* Altura de 3px */
+    background: #009246;            /* Color verde italiano */
+    transition: all 0.3s ease;      /* Transición suave de 0.3s */
+    transform: translateX(-50%);    /* Centrado perfecto */
+}
+
+/* 
+ * Estado hover de los enlaces de navegación
+ * Cambia color y muestra la línea inferior
+ */
+.nav-link:hover {
+    color: #009246;                 /* Cambia a verde italiano */
+    background: rgba(0, 146, 70, 0.1); /* Fondo verde muy sutil */
+}
+
+.nav-link:hover::after {
+    width: 100%;                    /* Muestra la línea inferior completa */
+}
+
+/* 
+ * Botón hamburguesa para dispositivos móviles
+ * Se oculta en pantallas grandes
+ */
+.nav-toggle {
+    display: none;                  /* Oculto por defecto */
+    flex-direction: column;         /* Apila las barras verticalmente */
+    cursor: pointer;                /* Cursor de mano al pasar el mouse */
+    padding: 5px;                   /* Padding de 5px */
+}
+
+/* 
+ * Barras individuales del botón hamburguesa
+ * Cada línea del ícono de hamburguesa
+ */
+.bar {
+    width: 25px;                    /* Ancho de 25px */
+    height: 3px;                    /* Altura de 3px */
+    background: #009246;            /* Color verde italiano */
+    margin: 3px 0;                  /* Margen vertical de 3px */
+    transition: all 0.3s ease;      /* Transición suave de 0.3s */
+    border-radius: 2px;             /* Esquinas ligeramente redondeadas */
+}
+
+/* 
+ * Estado activo del botón hamburguesa
+ * Se aplica cuando el menú móvil está abierto
+ */
+.nav-toggle.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px); /* Rota la primera barra 45° */
+}
+
+.nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;                     /* Oculta la segunda barra */
+}
+
+.nav-toggle.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px); /* Rota la tercera barra -45° */
 }
 
 /* ========================================== */
@@ -38,23 +189,26 @@ body {
  * Es la primera sección que ve el usuario al cargar la página
  */
 .hero {
-    height: 100vh;                  /* Ocupa exactamente la altura de la ventana del navegador */
+    min-height: 100vh;              /* Altura mínima de la ventana del navegador */
     display: flex;                  /* Activa el modelo de caja flexible */
-    align-items: flex-start;        /* Alinea el contenido hacia la parte superior */
-    justify-content: center;        /* Centra el contenido horizontalmente */
+    flex-direction: column;         /* Organiza elementos verticalmente */
+    align-items: center;            /* Centra el contenido horizontalmente */
+    justify-content: center;        /* Centra el contenido verticalmente */
     position: relative;             /* Permite posicionamiento absoluto de elementos hijos */
     overflow: hidden;               /* Oculta cualquier contenido que se salga del contenedor */
-    padding-top: 10vh;              /* Agrega espacio superior del 10% de la altura de la ventana */
+    padding: 80px 20px 20px;        /* Padding superior para navbar, lateral y inferior */
+    text-align: center;             /* Centra el texto */
 }
 
 /* 
  * Contenedor del contenido principal del hero
  * Contiene el título y subtítulo principales
  */
-.hero-content {
+        .hero-content {
     text-align: center;             /* Centra todo el texto horizontalmente */
     z-index: 2;                     /* Coloca este elemento por encima de las imágenes decorativas */
     animation: fadeInUp 1.5s ease;  /* Aplica animación de entrada que dura 1.5 segundos */
+    margin-bottom: 40px;            /* Espacio inferior para separar de las imágenes */
 }
 
 /* 
@@ -88,8 +242,8 @@ body {
  * Animación de aparición desde abajo
  * Se aplica al contenido del hero cuando la página se carga
  */
-@keyframes fadeInUp {
-    from {
+        @keyframes fadeInUp {
+            from {
         opacity: 0;                    /* Comienza completamente transparente */
         transform: translateY(30px);   /* Comienza 30px más abajo de su posición final */
     }
@@ -162,7 +316,7 @@ body {
  * Pseudo-elemento que crea la flecha del indicador
  * Se genera automáticamente después del elemento .scroll-indicator
  */
-.scroll-indicator::after {
+        .scroll-indicator::after {
     content: '↓';                   /* Símbolo de flecha hacia abajo */
     font-size: 2rem;                /* Tamaño de fuente grande (32px) */
     color: #000000;                 /* Color negro */
@@ -176,16 +330,16 @@ body {
  * Sección completa que contiene el carousel de videos
  * Tiene padding para separación de otras secciones
  */
-.carousel-section {
+        .carousel-section {
     padding: 80px 20px;             /* 80px arriba/abajo, 20px izquierda/derecha */
     background: #ffffff00;          /* Fondo transparente (hex con alpha 00) */
-}
+        }
 
 /* 
  * Título principal de la sección del carousel
  * "Beauty of Italy"
  */
-.carousel-section h2 {
+        .carousel-section h2 {
     text-align: center;             /* Centrado horizontalmente */
     font-size: 3rem;                /* Tamaño de fuente grande (48px) */
     margin-bottom: 50px;            /* Espacio inferior de 50px */
@@ -200,7 +354,7 @@ body {
  * Línea decorativa que aparece debajo del título
  * Usa los colores de la bandera italiana
  */
-.carousel-section h2::after {
+        .carousel-section h2::after {
     content: '';                    /* Crea un elemento vacío */
     position: absolute;             /* Posicionamiento absoluto respecto al h2 */
     bottom: -10px;                  /* 10px debajo del texto del título */
@@ -216,7 +370,7 @@ body {
  * Contenedor principal que envuelve todo el carousel
  * Define el área visible y las sombras
  */
-.carousel-container {
+        .carousel-container {
     max-width: 2000px;              /* Ancho máximo de 2000px */
     margin: 0 auto;                 /* Centrado horizontalmente */
     position: relative;             /* Permite posicionamiento absoluto de controles */
@@ -230,17 +384,17 @@ body {
  * Contenedor de todos los slides del carousel
  * Usa flexbox para alinear los slides horizontalmente
  */
-.carousel {
+        .carousel {
     display: flex;                  /* Activa flexbox para alineación horizontal */
     /* Transición suave personalizada: 0.8s de duración, curva de animación personalizada */
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
+        }
 
 /* 
  * Cada slide individual del carousel
  * Contiene un video y su caption correspondiente
  */
-.carousel-item {
+        .carousel-item {
     min-width: 100%;                /* Cada slide ocupa exactamente el 100% del contenedor */
     height: 600px;                  /* Altura fija de 600px */
     position: relative;             /* Permite posicionamiento absoluto del video y caption */
@@ -265,9 +419,9 @@ body {
  * Imágenes dentro de los slides (si las hay)
  * Estilos alternativos para cuando se usen imágenes en lugar de videos
  */
-.carousel-item img {
-    width: 100%;                    /* Ancho completo del slide */
-    height: 100%;                   /* Altura completa del slide */
+        .carousel-item img {
+    width: 500%;                    /* Ancho completo del slide */
+    height: 500%;                   /* Altura completa del slide */
     object-fit: cover;              /* Ajusta la imagen sin distorsión, recortando si es necesario */
 }
 
@@ -275,7 +429,7 @@ body {
  * Contenedor del texto descriptivo de cada slide
  * Aparece en la parte inferior con un fondo degradado
  */
-.carousel-caption {
+        .carousel-caption {
     position: absolute;             /* Posicionamiento absoluto respecto al carousel-item */
     bottom: 0;                      /* Pegado a la parte inferior del slide */
     left: 0;                        /* Pegado a la parte izquierda */
@@ -291,22 +445,22 @@ body {
 /* 
  * Estado hover del caption - muestra el texto cuando se pasa el mouse
  */
-.carousel-item:hover .carousel-caption {
+        .carousel-item:hover .carousel-caption {
     transform: translateY(0);       /* Mueve el caption a su posición normal (visible) */
-}
+        }
 
 /* 
  * Título dentro del caption (nombre de la ciudad)
  */
-.carousel-caption h3 {
+        .carousel-caption h3 {
     font-size: 2rem;                /* Tamaño de fuente grande (32px) */
     margin-bottom: 10px;            /* Espacio inferior de 10px */
-}
+        }
 
 /* 
  * Párrafo dentro del caption (descripción de la ciudad)
  */
-.carousel-caption p {
+        .carousel-caption p {
     font-size: 1.1rem;              /* Tamaño de fuente ligeramente mayor al normal (17.6px) */
 }
 
@@ -318,7 +472,7 @@ body {
  * Contenedor de los botones de navegación
  * Se posiciona relativo para contener los controles absolutos
  */
-.botones {
+        .botones {
     position: relative;             /* Permite posicionamiento absoluto de los controles */
     max-width: 1000px;              /* Ancho máximo de 1000px */
     margin: 0 auto;                 /* Centrado horizontalmente */
@@ -328,13 +482,13 @@ body {
  * Contenedor de los botones de navegación (anterior/siguiente)
  * Se posiciona debajo del carousel
  */
-.carousel-controls {
+        .carousel-controls {
     position: absolute;             /* Posicionamiento absoluto respecto a .botones */
     top: 100%;                      /* Comienza justo debajo del carousel */
     width: 100%;                    /* Ancho completo del contenedor padre */
     display: flex;                  /* Activa flexbox para alinear botones */
     justify-content: space-between; /* Distribuye botones en extremos opuestos */
-    transform: translateY(-50%);    /* Mueve hacia arriba 50% para centrado vertical */
+    transform: translateY(-5%);    /* Mueve hacia arriba 50% para centrado vertical */
     padding: 20px;                  /* Espaciado interno de 20px */
 }
 
@@ -342,7 +496,7 @@ body {
  * Botones individuales de navegación (‹ y ›)
  * Estilo circular con efectos hover
  */
-.carousel-btn {
+        .carousel-btn {
     background: rgba(255,255,255,0.9); /* Fondo blanco con 90% de opacidad */
     border: none;                   /* Sin borde */
     width: 50px;                    /* Ancho fijo de 50px */
@@ -352,37 +506,37 @@ body {
     cursor: pointer;                /* Cursor de mano al pasar el mouse */
     transition: all 0.3s ease;      /* Transición suave de 0.3s para todos los cambios */
     /* Sombra: 0px horizontal, 5px vertical, 15px difuminado, 20% opacidad negra */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
 
 /* 
  * Estado hover de los botones de navegación
  * Cambia color y tamaño al pasar el mouse
  */
-.carousel-btn:hover {
+        .carousel-btn:hover {
     background: #009246;            /* Fondo verde italiano */
     color: white;                   /* Texto blanco */
-    transform: scale(1.1);          /* Aumenta el tamaño 10% */
+    transform: scale(1.2);          /* Aumenta el tamaño 10% */
 }
 
 /* 
  * Contenedor de los indicadores de posición (puntos)
  * Se centra debajo del carousel
  */
-.carousel-indicators {
+        .carousel-indicators {
     text-align: center;             /* Centra los indicadores horizontalmente */
     margin-top: 30px;               /* Espacio superior de 30px */
-}
+        }
 
 /* 
  * Indicadores individuales (puntos que muestran la posición actual)
  * Estado normal (inactivo)
  */
-.indicator {
+        .indicator {
     display: inline-block;          /* Permite alineación horizontal */
     width: 12px;                    /* Ancho de 12px */
     height: 12px;                   /* Altura de 12px */
-    background: #ccc;               /* Color gris claro */
+    background: #ffffff;               /* Color gris claro */
     border-radius: 50%;             /* Forma circular */
     margin: 0 8px;                  /* 8px de margen izquierdo y derecho */
     cursor: pointer;                /* Cursor de mano al pasar el mouse */
@@ -393,10 +547,10 @@ body {
  * Estado activo del indicador
  * Se aplica al indicador que corresponde al slide actual
  */
-.indicator.active {
-    background: #009246;            /* Fondo verde italiano */
+        .indicator.active {
+    background: #000000;            /* Fondo verde italiano */
     width: 30px;                    /* Ancho expandido de 30px */
-    border-radius: 6px;             /* Forma rectangular redondeada */
+    border-radius: 5px;             /* Forma rectangular redondeada */
 }
 
 /* ========================================== */
@@ -407,26 +561,26 @@ body {
  * Sección completa de cultura italiana
  * Tiene el mismo gradiente de fondo que el body
  */
-.culture-section {
+        .culture-section {
     padding: 100px 20px;            /* 100px arriba/abajo, 20px izquierda/derecha */
     /* Mismo gradiente de la bandera italiana que el body */
-    background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
-}
+            background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
+        }
 
 /* 
  * Contenedor principal de la sección de cultura
  * Limita el ancho máximo y centra el contenido
  */
-.culture-container {
+        .culture-container {
     max-width: 1200px;              /* Ancho máximo de 1200px */
     margin: 0 auto;                 /* Centrado horizontalmente */
-}
+        }
 
 /* 
  * Encabezado de la sección de cultura
  * Contiene el título y subtítulo
  */
-.culture-header {
+        .culture-header {
     text-align: center;             /* Centrado horizontalmente */
     margin-bottom: 60px;            /* Espacio inferior de 60px */
     animation: fadeIn 1s ease;      /* Animación de aparición de 1 segundo */
@@ -436,7 +590,7 @@ body {
  * Título principal de la sección de cultura
  * "Italian Culture"
  */
-.culture-header h2 {
+        .culture-header h2 {
     font-size: 3rem;                /* Tamaño de fuente grande (48px) */
     color: #009246;                 /* Verde italiano */
     margin-bottom: 20px;            /* Espacio inferior de 20px */
@@ -446,7 +600,7 @@ body {
  * Subtítulo de la sección de cultura
  * "A Legacy of Art, Passion, and Tradition"
  */
-.culture-header .subtitle {
+        .culture-header .subtitle {
     font-size: 1.3rem;              /* Tamaño de fuente mediano (20.8px) */
     color: #666;                    /* Color gris medio */
     font-style: italic;             /* Texto en cursiva */
@@ -456,9 +610,9 @@ body {
  * Grid de tarjetas de cultura
  * Layout responsive que se adapta al tamaño de pantalla
  */
-.culture-grid {
+        .culture-grid {
     /* Grid responsive: columnas automáticas con ancho mínimo de 300px */
-    display: grid;
+            display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 40px;                      /* Espacio de 40px entre tarjetas */
     margin-top: 50px;               /* Espacio superior de 50px */
@@ -468,12 +622,12 @@ body {
  * Tarjetas individuales de cultura
  * Cada una representa un aspecto de la cultura italiana
  */
-.culture-card {
+        .culture-card {
     background: white;              /* Fondo blanco */
     padding: 40px;                  /* Espaciado interno de 40px */
     border-radius: 15px;            /* Esquinas redondeadas de 15px */
     /* Sombra: 0px horizontal, 10px vertical, 30px difuminado, 10% opacidad negra */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     transition: all 0.4s ease;      /* Transición suave de 0.4s para todos los cambios */
     position: relative;             /* Permite posicionamiento del pseudo-elemento */
     overflow: hidden;               /* Oculta el pseudo-elemento que se sale */
@@ -483,7 +637,7 @@ body {
  * Línea decorativa superior de las tarjetas
  * Se crea con un pseudo-elemento
  */
-.culture-card::before {
+        .culture-card::before {
     content: '';                    /* Crea un elemento vacío */
     position: absolute;             /* Posicionamiento absoluto respecto a la tarjeta */
     top: 0;                         /* Pegado a la parte superior */
@@ -500,21 +654,21 @@ body {
  * Estado hover de las tarjetas
  * Muestra la línea decorativa y eleva la tarjeta
  */
-.culture-card:hover::before {
+        .culture-card:hover::before {
     transform: scaleX(1);           /* Muestra la línea (ancho completo) */
-}
+        }
 
-.culture-card:hover {
+        .culture-card:hover {
     transform: translateY(-10px);   /* Eleva la tarjeta 10px hacia arriba */
     /* Sombra más pronunciada: 0px horizontal, 20px vertical, 40px difuminado, 15% opacidad */
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-}
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
 
 /* 
  * Iconos emoji de las tarjetas de cultura
  * 🎨 🍝 🎭
  */
-.culture-icon {
+        .culture-icon {
     font-size: 3rem;                /* Tamaño de fuente muy grande (48px) */
     margin-bottom: 20px;            /* Espacio inferior de 20px */
     display: block;                 /* Hace que el emoji ocupe toda la línea */
@@ -524,7 +678,7 @@ body {
  * Títulos de las tarjetas de cultura
  * "Artistic Heritage", "Culinary Excellence", "Living Traditions"
  */
-.culture-card h3 {
+        .culture-card h3 {
     font-size: 1.8rem;              /* Tamaño de fuente grande (28.8px) */
     color: #009246;                 /* Verde italiano */
     margin-bottom: 15px;            /* Espacio inferior de 15px */
@@ -534,7 +688,7 @@ body {
  * Párrafos descriptivos de las tarjetas
  * Contienen la información detallada sobre cada aspecto cultural
  */
-.culture-card p {
+        .culture-card p {
     font-size: 1.1rem;              /* Tamaño de fuente ligeramente mayor (17.6px) */
     line-height: 1.8;               /* Espaciado entre líneas de 1.8 (más legible) */
     color: #555;                    /* Color gris oscuro para mejor legibilidad */
@@ -548,9 +702,9 @@ body {
  * Pie de página completo
  * Tiene el mismo gradiente de fondo que el resto de la página
  */
-footer {
+        footer {
     /* Mismo gradiente de la bandera italiana */
-    background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
+            background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
     padding: 30px 20px 20px;        /* 30px arriba, 20px izquierda/derecha, 20px abajo (compacto) */
     text-align: center;             /* Centrado horizontalmente */
     color: #000;                    /* Color de texto negro */
@@ -564,7 +718,7 @@ footer {
  * Patrón de fondo animado del footer
  * Crea un efecto visual sutil con puntos
  */
-footer::before {
+        footer::before {
     content: '';                    /* Crea un elemento vacío */
     position: absolute;             /* Posicionamiento absoluto respecto al footer */
     top: 0;                         /* Pegado a la parte superior */
@@ -572,7 +726,7 @@ footer::before {
     width: 200%;                    /* Ancho doble para permitir movimiento */
     height: 200%;                   /* Altura doble para permitir movimiento */
     /* Patrón de puntos: círculos blancos semitransparentes de 1px */
-    background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
     background-size: 50px 50px;     /* Tamaño de cada punto: 50x50px */
     animation: movePattern 20s linear infinite; /* Animación de movimiento de 20s, infinita */
     z-index: 0;                     /* Por debajo del contenido del footer */
@@ -582,7 +736,7 @@ footer::before {
  * Contenedor principal del footer
  * Organiza todo el contenido del pie de página
  */
-.footer-container {
+        .footer-container {
     position: relative;             /* Permite que esté por encima del patrón de fondo */
     z-index: 1;                     /* Por encima del pseudo-elemento de fondo */
     max-width: 1200px;              /* Ancho máximo de 1200px */
@@ -593,23 +747,23 @@ footer::before {
  * Lema principal del footer
  * "La Dolce Vita — Vive, Ama y Disfruta"
  */
-.footer-tagline {
+        .footer-tagline {
     font-size: 1.2rem;              /* Tamaño de fuente mediano (19.2px) */
     font-style: italic;             /* Texto en cursiva */
     color: #000;                    /* Color negro */
     margin-bottom: 20px;            /* Espacio inferior de 20px */
     font-weight: bold;              /* Texto en negrita */
     /* Sombra de texto: 1px horizontal, 1px vertical, 3px difuminado, 10% opacidad */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-}
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
 
 /* 
  * Sección que contiene la información del equipo
  * Grid responsive para los miembros del equipo
  */
-.team-section {
+        .team-section {
     /* Grid responsive: columnas automáticas con ancho mínimo de 200px */
-    display: grid;
+            display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 0px;                       /* Sin espacio entre elementos */
     margin-bottom: 20px;            /* Espacio inferior de 20px */
@@ -619,7 +773,7 @@ footer::before {
  * Contenedor de cada miembro del equipo
  * Lino y Brayan
  */
-.team-member {
+        .team-member {
     padding: 3px;                   /* Espaciado interno mínimo de 3px */
     border-radius: 15px;            /* Esquinas redondeadas de 15px */
     backdrop-filter: blur(10px);    /* Efecto de desenfoque de fondo */
@@ -630,41 +784,41 @@ footer::before {
  * Estado hover de los miembros del equipo
  * Eleva el elemento y agrega fondo semitransparente
  */
-.team-member:hover {
+        .team-member:hover {
     transform: translateY(-5px);    /* Eleva el elemento 5px */
-    background: rgba(255,255,255,0.5); /* Fondo blanco con 50% de opacidad */
+    background: rgb(255, 255, 255); /* Fondo blanco con 50% de opacidad */
     /* Sombra: 0px horizontal, 10px vertical, 25px difuminado, 15% opacidad */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
 
 /* 
  * Nombres de los miembros del equipo
  * "Lino" y "Brayan"
  */
-.member-name {
+        .member-name {
     font-size: 1.1rem;              /* Tamaño de fuente ligeramente mayor (17.6px) */
     font-weight: bold;              /* Texto en negrita */
     color: #000;                    /* Color negro */
     margin-bottom: 10px;            /* Espacio inferior de 10px */
     /* Sombra de texto: 1px horizontal, 1px vertical, 2px difuminado, 10% opacidad */
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-}
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
 
 /* 
  * Contenedor de los enlaces sociales
  * Centra los iconos de Instagram
  */
-.member-socials {
+        .member-socials {
     display: flex;                  /* Activa flexbox para alineación horizontal */
     justify-content: center;        /* Centra los enlaces horizontalmente */
-    gap: 15px;                      /* Espacio de 15px entre enlaces */
+    gap: 10px;                      /* Espacio de 15px entre enlaces */
 }
 
 /* 
  * Enlaces a redes sociales
  * Enlaces a Instagram de cada miembro
  */
-.social-link {
+        .social-link {
     color: #000;                    /* Color negro por defecto */
     transition: all 0.3s ease;      /* Transición suave de 0.3s */
     display: inline-block;          /* Permite transformaciones */
@@ -674,25 +828,25 @@ footer::before {
  * Estado hover de los enlaces sociales
  * Cambia color y aumenta el tamaño
  */
-.social-link:hover {
+        .social-link:hover {
     color: #009246;                 /* Verde italiano al hacer hover */
     transform: scale(1.2);          /* Aumenta el tamaño 20% */
-}
+        }
 
 /* 
  * Iconos SVG de Instagram
  * Tamaño fijo para consistencia visual
  */
-.icon {
+        .icon {
     width: 28px;                    /* Ancho fijo de 28px */
     height: 28px;                   /* Altura fija de 28px */
-}
+        }
 
 /* 
  * Copyright del footer
  * "© 2025 - Ricardo Bravo Lino"
  */
-.footer-copy {
+        .footer-copy {
     font-size: 0.85rem;             /* Tamaño de fuente pequeño (13.6px) */
     color: #000;                    /* Color negro */
     opacity: 0.8;                   /* 80% de opacidad (más sutil) */
@@ -707,16 +861,25 @@ footer::before {
 /* ========================================== */
 
 /* 
- * Imagen decorativa en la esquina superior izquierda
+ * Contenedor de imágenes decorativas debajo del título
+ * Organiza las dos imágenes lado a lado
+ */
+.hero-images-container {
+    display: flex;                  /* Activa flexbox para alineación horizontal */
+    gap: 40px;                      /* Espacio de 40px entre las imágenes */
+    justify-content: center;        /* Centra las imágenes horizontalmente */
+    align-items: center;            /* Centra las imágenes verticalmente */
+    margin-top: 20px;               /* Espacio superior de 20px */
+}
+
+/* 
+ * Imagen decorativa izquierda
  * Contiene img.jpg
  */
 .tower-container-1 {
-    position: absolute;             /* Posicionamiento absoluto respecto al hero */
-    top: 20px;                      /* 20px desde la parte superior */
-    left: 20px;                     /* 20px desde la parte izquierda */
-    width: 120px;                   /* Ancho fijo de 120px */
-    height: 120px;                  /* Altura fija de 120px */
-    z-index: 1;                     /* Por encima del fondo pero debajo del contenido */
+    position: relative;             /* Posicionamiento relativo */
+    width: 150px;                   /* Ancho fijo de 150px */
+    height: 150px;                  /* Altura fija de 150px */
     border-radius: 15px;            /* Esquinas redondeadas de 15px */
     overflow: hidden;               /* Oculta cualquier parte de la imagen que se salga */
     /* Sombra: 0px horizontal, 5px vertical, 15px difuminado, 20% opacidad */
@@ -725,16 +888,13 @@ footer::before {
 }
 
 /* 
- * Imagen decorativa en la esquina inferior derecha
+ * Imagen decorativa derecha
  * Contiene image.png (Torre de Pisa)
  */
 .tower-container-2 {
-    position: absolute;             /* Posicionamiento absoluto respecto al hero */
-    bottom: 20px;                   /* 20px desde la parte inferior */
-    right: 20px;                    /* 20px desde la parte derecha */
-    width: 120px;                   /* Ancho fijo de 120px */
-    height: 120px;                  /* Altura fija de 120px */
-    z-index: 1;                     /* Por encima del fondo pero debajo del contenido */
+    position: relative;             /* Posicionamiento relativo */
+    width: 150px;                   /* Ancho fijo de 150px */
+    height: 150px;                  /* Altura fija de 150px */
     border-radius: 15px;            /* Esquinas redondeadas de 15px */
     overflow: hidden;               /* Oculta cualquier parte de la imagen que se salga */
     /* Sombra: 0px horizontal, 5px vertical, 15px difuminado, 20% opacidad */
@@ -763,15 +923,26 @@ footer::before {
  */
 .tower-image {
     width: 100%;                    /* Ancho completo del contenedor */
-    height: auto;                   /* Altura automática para mantener proporción */
-    transform: rotate(4deg);        /* Rotación de 4 grados (efecto de inclinación) */
+    height: 100%;                   /* Altura completa del contenedor */
+    object-fit: cover;              /* Ajusta la imagen manteniendo proporción */
+    transform: rotate(2deg);        /* Rotación de 2 grados (efecto de inclinación más sutil) */
     /* Sombra de imagen: 0px horizontal, 10px vertical, 15px difuminado, 25% opacidad */
     filter: drop-shadow(0 10px 15px rgba(0,0,0,0.25));
     border-radius: 12px;            /* Esquinas redondeadas de 12px */
+    transition: transform 0.3s ease; /* Transición suave para efectos hover */
+}
+
+/* 
+ * Efecto hover en las imágenes
+ * Aumenta ligeramente la rotación y escala
+ */
+.tower-container-1:hover .tower-image,
+.tower-container-2:hover .tower-image {
+    transform: rotate(4deg) scale(1.05); /* Rotación de 4° y escala 105% */
 }
 
 /* ========================================== */
-/* MEDIA QUERIES - Diseño responsive */
+        /* MEDIA QUERIES - Diseño responsive */
 /* ========================================== */
 
 /* 
@@ -799,16 +970,70 @@ footer::before {
  * Tablets y dispositivos medianos
  * Pantallas de 768px o menos de ancho
  */
-@media (max-width: 768px) {
-    .hero h1 {
+        @media (max-width: 768px) {
+    /* Ajustes de la navbar para tablets */
+    .nav-menu {
+        position: fixed;                /* Posición fija para el menú móvil */
+        left: -100%;                   /* Inicialmente oculto a la izquierda */
+        top: 70px;                     /* Comienza justo debajo de la navbar */
+        flex-direction: column;         /* Apila los elementos verticalmente */
+        background-color: rgba(255, 255, 255, 0.98); /* Fondo blanco con 98% de opacidad */
+        width: 100%;                   /* Ancho completo de la pantalla */
+        text-align: center;            /* Centra el texto */
+        transition: 0.3s;              /* Transición suave de 0.3s */
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+        backdrop-filter: blur(10px);   /* Efecto de desenfoque */
+        gap: 0;                        /* Sin espacio entre elementos */
+        padding: 20px 0;               /* Padding vertical de 20px */
+    }
+
+    .nav-menu.active {
+        left: 0;                       /* Muestra el menú cuando está activo */
+    }
+
+    .nav-item {
+        margin: 10px 0;                /* Margen vertical de 10px entre elementos */
+    }
+
+    .nav-link {
+        font-size: 1.2rem;             /* Tamaño de fuente más grande en móviles */
+        padding: 15px 20px;            /* Padding más generoso */
+        display: block;                /* Hace que los enlaces ocupen toda la línea */
+    }
+
+    .nav-toggle {
+        display: flex;                 /* Muestra el botón hamburguesa */
+    }
+
+    /* Asegurar que el menú móvil funcione correctamente */
+    .nav-menu {
+        position: fixed !important;    /* Fuerza posición fija */
+        left: -100% !important;        /* Fuerza posición oculta */
+        top: 70px !important;          /* Fuerza posición debajo de la navbar */
+        flex-direction: column !important; /* Fuerza dirección vertical */
+        background-color: rgba(255, 255, 255, 0.98) !important; /* Fondo blanco */
+        width: 100% !important;        /* Ancho completo */
+        text-align: center !important; /* Centrado */
+        transition: left 0.3s ease !important; /* Transición suave */
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05) !important; /* Sombra */
+        backdrop-filter: blur(10px) !important; /* Efecto blur */
+        gap: 0 !important;             /* Sin espacio entre elementos */
+        padding: 20px 0 !important;    /* Padding vertical */
+        z-index: 999 !important;       /* Por encima de otros elementos */
+    }
+
+    .nav-menu.active {
+        left: 0 !important;            /* Muestra el menú cuando está activo */
+    }
+            .hero h1 {
         font-size: 3.5rem;          /* Título más pequeño en tablets (56px) */
-    }
+            }
 
-    .hero p {
+            .hero p {
         font-size: 1.3rem;          /* Subtítulo más pequeño en tablets (20.8px) */
-    }
+            }
 
-    .tower-container {
+            .tower-container {
         right: 5%;                  /* 5% desde la derecha */
         bottom: 15%;                /* 15% desde la parte inferior */
         transform: rotate(4deg) scale(0.7); /* Rotación de 4° y escala de 70% */
@@ -816,11 +1041,15 @@ footer::before {
 
     .tower-container-1,
     .tower-container-2 {
-        width: 100px;               /* Imágenes más pequeñas en tablets */
-        height: 100px;              /* Imágenes más pequeñas en tablets */
+        width: 120px;               /* Imágenes más pequeñas en tablets */
+        height: 120px;              /* Imágenes más pequeñas en tablets */
     }
 
-    .carousel-item {
+    .hero-images-container {
+        gap: 20px;                  /* Espacio reducido entre imágenes en tablets */
+            }
+
+            .carousel-item {
         height: 400px;              /* Altura reducida del carousel en tablets (400px) */
     }
     
@@ -828,39 +1057,39 @@ footer::before {
         width: 100%;                /* Ancho completo del slide */
         height: 100%;               /* Altura completa del slide */
         object-fit: cover;          /* Ajusta el video manteniendo proporción */
-    }
+            }
 
-    .carousel-caption h3 {
+            .carousel-caption h3 {
         font-size: 1.5rem;          /* Título del caption más pequeño (24px) */
-    }
+            }
 
-    .carousel-caption p {
+            .carousel-caption p {
         font-size: 0.95rem;         /* Párrafo del caption más pequeño (15.2px) */
-    }
+            }
 
-    .culture-header h2 {
+            .culture-header h2 {
         font-size: 2rem;            /* Título de cultura más pequeño (32px) */
-    }
+            }
 
-    .culture-grid {
+            .culture-grid {
         grid-template-columns: 1fr; /* Una sola columna en tablets */
         gap: 25px;                  /* Espacio reducido entre tarjetas (25px) */
-    }
+            }
 
-    .culture-card {
+            .culture-card {
         padding: 30px;              /* Padding reducido en tarjetas (30px) */
-    }
+            }
 
-    .footer-tagline {
+            .footer-tagline {
         font-size: 1.2rem;          /* Lema del footer más pequeño (19.2px) */
-    }
+            }
 
-    .team-section {
+            .team-section {
         grid-template-columns: 1fr; /* Una sola columna para el equipo */
         gap: 20px;                  /* Espacio de 20px entre miembros */
-    }
+            }
 
-    .carousel-btn {
+            .carousel-btn {
         width: 40px;                /* Botones más pequeños (40px) */
         height: 40px;               /* Botones más pequeños (40px) */
         font-size: 1.2rem;          /* Texto de botones más pequeño (19.2px) */
@@ -871,16 +1100,16 @@ footer::before {
  * Dispositivos móviles pequeños
  * Pantallas de 480px o menos de ancho
  */
-@media (max-width: 480px) {
-    .hero h1 {
+        @media (max-width: 480px) {
+            .hero h1 {
         font-size: 2.5rem;          /* Título aún más pequeño en móviles (40px) */
-    }
+            }
 
-    .hero p {
+            .hero p {
         font-size: 1rem;            /* Subtítulo más pequeño en móviles (16px) */
-    }
+            }
 
-    .tower-container {
+            .tower-container {
         transform: rotate(4deg) scale(0.5); /* Rotación de 4° y escala de 50% */
         right: 2%;                  /* 2% desde la derecha */
         bottom: 18%;                /* 18% desde la parte inferior */
@@ -888,8 +1117,13 @@ footer::before {
 
     .tower-container-1,
     .tower-container-2 {
-        width: 80px;                /* Imágenes más pequeñas en móviles */
-        height: 80px;               /* Imágenes más pequeñas en móviles */
+        width: 100px;               /* Imágenes más pequeñas en móviles */
+        height: 100px;              /* Imágenes más pequeñas en móviles */
+    }
+
+    .hero-images-container {
+        gap: 15px;                  /* Espacio reducido entre imágenes en móviles */
+        flex-direction: column;     /* Apila las imágenes verticalmente en móviles muy pequeños */
     }
 
     .carousel-item {
