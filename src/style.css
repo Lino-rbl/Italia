@@ -1,665 +1,925 @@
-        /* Reset CSS para eliminar márgenes y paddings por defecto */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box; /* Incluye padding y border en el cálculo del width/height */
-        }
-
-        body {
-            font-family: 'Georgia', serif;
-            overflow-x: hidden; /* Previene el scroll horizontal */
-            color: #333;
-            /* Gradiente que representa los colores de la bandera italiana */
-            background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
-        }
-
-        /* Hero Section - Sección principal de la página */
-        .hero {
-            height: 100vh; /* Ocupa toda la altura de la ventana */
-            display: flex;
-            align-items: flex-start; /* Cambiar de center a flex-start para subir el contenido */
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 10vh; /* Agregar padding superior para subir el contenido */
-        }
-
-
-        /* Contenido principal del hero */
-        .hero-content {
-            
-            text-align: center;
-            z-index: 2; /* Por encima del fondo */
-            animation: fadeInUp 1.5s ease; /* Animación de entrada */
-        }
-
-        /* Animación de aparición desde abajo */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero h1 {
-            font-size: 10rem;
-            color: #000000;
-            text-shadow: 3px 3px 10px rgba(0,0,0,0.3);
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-
-        .hero p {
-            font-size: 2.5rem;
-            color: #000000;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-            font-style: italic;
-        }
-
-        /* Indicador de scroll */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite; /* Animación de rebote continua */
-            z-index: 3;
-        }
-
-        /* Animación de rebote para el indicador de scroll */
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-20px); } /* Rebote hacia arriba */
-            60% { transform: translateX(-50%) translateY(-10px); }
-        }
-
-        /* Flecha del indicador de scroll */
-        .scroll-indicator::after {
-            content: '↓';
-            font-size: 2rem;
-            color: #000000;
-        }
-
-        /* Carousel Section - Galería deslizante */
-        .carousel-section {
-            padding: 80px 20px;
-            background: #ffffff00; /* Fondo transparente */
-        }
-
-        .carousel-section h2 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 50px;
-            color: #009246;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* Línea decorativa bajo el título */
-        .carousel-section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 3px;
-            background: linear-gradient(90deg, #009246, #ce2b37); /* Colores bandera italiana */
-        }
-
-        /* Contenedor principal del carousel */
-        .carousel-container {
-            max-width: 2000px;
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2); /* Sombra pronunciada */
-        }
-
-        /* Contenedor de slides */
-        .carousel {
-            display: flex;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* Transición suave personalizada */
-        }
-
-        /* Cada slide individual */
-        .carousel-item {
-            min-width: 100%; /* Cada slide ocupa el 100% del contenedor */
-            height: 600px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Videos en el carousel */
-        .carousel-item video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ajusta la imagen sin distorsión */
-        }
-
-        /* Texto descriptivo de cada slide */
-        .carousel-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8)); /* Degradado sobre la imagen */
-            color: white;
-            padding: 40px 30px 30px;
-            transform: translateY(100%); /* Oculto por defecto */
-            transition: transform 0.5s ease;
-        }
-
-        /* Muestra el texto al hacer hover */
-        .carousel-item:hover .carousel-caption {
-            transform: translateY(0);
-        }
-
-        .carousel-caption h3 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .carousel-caption p {
-            font-size: 1.1rem;
-        }
-
-        .botones {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        /* Controles de navegación del carousel */
-        .carousel-controls {
-            position: absolute;
-            top: 100%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            padding:  20px;
-        }
-
-        /* Botones de navegación */
-        .carousel-btn {
-            background: rgba(255,255,255,0.9);
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .carousel-btn:hover {
-            background: #009246; /* Verde italiano al hover */
-            color: white;
-            transform: scale(1.1); /* Efecto de agrandamiento */
-        }
-
-        /* Indicadores de posición */
-        .carousel-indicators {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background: #ccc;
-            border-radius: 50%;
-            margin: 0 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .indicator.active {
-            background: #009246;
-            width: 30px;
-            border-radius: 6px; /* Se convierte en rectángulo cuando está activo */
-        }
-
-        /* Culture Section - Sección sobre cultura italiana */
-        .culture-section {
-            padding: 100px 20px;
-            background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
-        }
-
-        .culture-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .culture-header {
-            text-align: center;
-            margin-bottom: 60px;
-            animation: fadeIn 1s ease;
-        }
-
-        /* Animación simple de aparición */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .culture-header h2 {
-            font-size: 3rem;
-            color: #009246;
-            margin-bottom: 20px;
-        }
-
-        .culture-header .subtitle {
-            font-size: 1.3rem;
-            color: #666;
-            font-style: italic;
-        }
-
-        /* Grid de tarjetas de cultura */
-        .culture-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Grid responsive */
-            gap: 40px;
-            margin-top: 50px;
-        }
-
-        /* Tarjetas individuales */
-        .culture-card {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Línea decorativa superior animada */
-        .culture-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #009246, #ce2b37); /* Colores bandera italiana */
-            transform: scaleX(0); /* Oculto por defecto */
-            transition: transform 0.4s ease;
-        }
-
-        /* Muestra la línea al hacer hover */
-        .culture-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .culture-card:hover {
-            transform: translateY(-10px); /* Efecto de elevación */
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .culture-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .culture-card h3 {
-            font-size: 1.8rem;
-            color: #009246;
-            margin-bottom: 15px;
-        }
-
-        .culture-card p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-        }
-
-        /* Enhanced Footer - Pie de página mejorado y más compacto */
-        footer {
-            background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
-            padding: 30px 20px 20px; /* Reducir padding para hacer más compacto */
-            text-align: center;
-            color: #000;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.2); /* Sombra superior */
-        }
-
-        /* Patrón de fondo igual al hero */
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: movePattern 20s linear infinite;
-            z-index: 0;
-        }
-
-        .footer-container {
-            position: relative;
-            z-index: 1; /* Por encima del patrón de fondo */
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-tagline {
-            font-size: 1.2rem; /* Reducir tamaño */
-            font-style: italic;
-            color: #000;
-            margin-bottom: 20px; /* Reducir margen */
-            font-weight: bold;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-        }
-
-        /* Sección del equipo más compacta */
-        .team-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0px;
-            margin-bottom: 20px; /* Reducir margen */
-        }
-
-        .team-member {
-            padding: 3px; /* Reducir padding */
-            border-radius: 15px;
-            backdrop-filter: blur(10px); /* Efecto de desenfoque de fondo */
-            transition: all 0.3s ease;
-        }
-
-        .team-member:hover {
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.5);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .member-name {
-            font-size: 1.1rem; /* Reducir tamaño */
-            font-weight: bold;
-            color: #000;
-            margin-bottom: 10px; /* Reducir margen */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-
-        .member-socials {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .social-link {
-            color: #000;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .social-link:hover {
-            color: #009246;
-            transform: scale(1.2); /* Efecto de agrandamiento al hover */
-        }
-
-        .icon {
-            width: 28px;
-            height: 28px;
-        }
-
-        .footer-copy {
-            font-size: 0.85rem; /* Reducir tamaño */
-            color: #000;
-            opacity: 0.8;
-            font-family: 'Georgia', serif;
-            margin-top: 15px; /* Reducir margen */
-            padding-top: 10px; /* Reducir padding */
-            border-top: 2px solid rgba(0,0,0,0.2); /* Línea separadora */
-        }
-
-        /* MEDIA QUERIES - Diseño responsive */
-
-        /* Dispositivos grandes - computadoras */
-        @media (min-width: 1200px) {
-            .carousel-item {
-                height: 700px; /* Altura mayor para pantallas grandes */
-            }
-            
-            .carousel-item video {
-                width: 100%;
-                height: 100%;
-            }
-            
-            .tower-container-1,
-            .tower-container-2 {
-                width: 150px;
-                height: 150px;
-            }
-        }
-
-        /* Tablets y dispositivos medianos */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 3.5rem; /* Título más pequeño en tablets */
-            }
-
-            .hero p {
-                font-size: 1.3rem;
-            }
-
-            .tower-container {
-                right: 5%;
-                bottom: 15%;
-                transform: rotate(4deg) scale(0.7); /* Torre más pequeña */
-            }
-
-            .tower-container-1,
-            .tower-container-2 {
-                width: 100px;
-                height: 100px;
-            }
-
-            .carousel-item {
-                height: 400px; /* Altura reducida del carousel */
-            }
-            
-            .carousel-item video {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .carousel-caption h3 {
-                font-size: 1.5rem;
-            }
-
-            .carousel-caption p {
-                font-size: 0.95rem;
-            }
-
-            .culture-header h2 {
-                font-size: 2rem;
-            }
-
-            .culture-grid {
-                grid-template-columns: 1fr; /* Una columna en tablets */
-                gap: 25px;
-            }
-
-            .culture-card {
-                padding: 30px;
-            }
-
-            .footer-tagline {
-                font-size: 1.2rem;
-            }
-
-            .team-section {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .carousel-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-        }
-
-        /* Dispositivos móviles pequeños */
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2.5rem; /* Título aún más pequeño en móviles */
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .tower-container {
-                transform: rotate(4deg) scale(0.5);
-                right: 2%;
-                bottom: 18%;
-            }
-
-            .tower-container-1,
-            .tower-container-2 {
-                width: 80px;
-                height: 80px;
-            }
-
-            .carousel-item {
-                height: 300px; /* Altura aún más reducida para móviles */
-            }
-            
-            .carousel-item video {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .carousel-section h2 {
-                font-size: 2rem;
-            }
-
-            .culture-header h2 {
-                font-size: 1.8rem;
-            }
-
-            .culture-card h3 {
-                font-size: 1.5rem;
-            }
-
-            .member-name {
-                font-size: 1.1rem;
-            }
-
-            .icon {
-                width: 24px;
-                height: 24px;
-            }
-        }
-
-        /* HERO SECTION - Estilos específicos para la imagen real */
-        .hero {
-            position: relative;
-            height: 100vh;
-            background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            color: #222;
-            font-family: 'Playfair Display', serif;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.15);
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            color: #555;
-            margin-top: 10px;
-        }
-
-        /* Imágenes posicionadas en esquinas */
-        .tower-container-1 {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 120px;
-            height: 120px;
-            z-index: 1;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            animation: towerFloat 6s ease-in-out infinite;
-        }
-
-        .tower-container-2 {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 120px;
-            height: 120px;
-            z-index: 1;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            animation: towerFloat 6s ease-in-out infinite;
-        }
-
-        /* Mantener el container original para compatibilidad */
-        .tower-container {
-            position: absolute;
-            right: 5%;
-            bottom: 0;
-            width: 140px;
-            z-index: 1;
-            transform: translateY(0);
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-            animation: towerFloat 6s ease-in-out infinite;
-        }
-
-        .tower-image {
-            width: 100%;
-            height: auto;
-            transform: rotate(4deg); /* Inclinación característica de la torre */
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.25));
-            border-radius: 12px;
-        }
-
-        /* Flotación suave para la imagen */
-        @keyframes towerFloat {
-            0%, 100% { transform: rotate(4deg) translateY(0); }
-            50% { transform: rotate(4deg) translateY(-15px); }
-        }
-  
+/* ========================================== */
+/* RESET CSS Y CONFIGURACIÓN BASE */
+/* ========================================== */
+
+/* 
+ * Reset CSS universal - elimina todos los márgenes y paddings por defecto
+ * que los navegadores aplican automáticamente a los elementos HTML
+ * Esto asegura que nuestro diseño sea consistente en todos los navegadores
+ */
+* {
+    margin: 0;                    /* Elimina márgenes externos de todos los elementos */
+    padding: 0;                   /* Elimina padding interno de todos los elementos */
+    box-sizing: border-box;       /* Incluye padding y border en el cálculo del width/height */
+}
+
+/* 
+ * Configuración base del elemento body
+ * Define la tipografía, colores y fondo principal de toda la página
+ */
+body {
+    font-family: 'Georgia', serif;    /* Fuente serif elegante para el texto */
+    overflow-x: hidden;               /* Previene el scroll horizontal no deseado */
+    color: #333;                      /* Color de texto principal (gris oscuro) */
+    /* 
+     * Gradiente horizontal que representa los colores de la bandera italiana:
+     * Verde (#009246) -> Blanco (#fff) -> Rojo (#ce2b37)
+     * Se extiende de izquierda a derecha en toda la página
+     */
+    background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
+}
+
+/* ========================================== */
+/* HERO SECTION - Sección principal de la página */
+/* ========================================== */
+
+/* 
+ * Contenedor principal del hero que ocupa toda la pantalla
+ * Es la primera sección que ve el usuario al cargar la página
+ */
+.hero {
+    height: 100vh;                  /* Ocupa exactamente la altura de la ventana del navegador */
+    display: flex;                  /* Activa el modelo de caja flexible */
+    align-items: flex-start;        /* Alinea el contenido hacia la parte superior */
+    justify-content: center;        /* Centra el contenido horizontalmente */
+    position: relative;             /* Permite posicionamiento absoluto de elementos hijos */
+    overflow: hidden;               /* Oculta cualquier contenido que se salga del contenedor */
+    padding-top: 10vh;              /* Agrega espacio superior del 10% de la altura de la ventana */
+}
+
+/* 
+ * Contenedor del contenido principal del hero
+ * Contiene el título y subtítulo principales
+ */
+.hero-content {
+    text-align: center;             /* Centra todo el texto horizontalmente */
+    z-index: 2;                     /* Coloca este elemento por encima de las imágenes decorativas */
+    animation: fadeInUp 1.5s ease;  /* Aplica animación de entrada que dura 1.5 segundos */
+}
+
+/* 
+ * Título principal "Discover Italy"
+ * Es el elemento más prominente de la página
+ */
+.hero h1 {
+    font-size: 10rem;                           /* Tamaño de fuente muy grande (160px) */
+    color: #000000;                             /* Color negro puro */
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.3); /* Sombra de texto: 3px horizontal, 3px vertical, 10px difuminado, 30% opacidad */
+    margin-bottom: 20px;                        /* Espacio inferior de 20px */
+    letter-spacing: 2px;                        /* Espaciado entre letras de 2px */
+}
+
+/* 
+ * Subtítulo "La Dolce Vita Awaits"
+ * Complementa al título principal
+ */
+.hero p {
+    font-size: 2.5rem;                          /* Tamaño de fuente grande (40px) */
+    color: #000000;                             /* Color negro puro */
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);  /* Sombra de texto más sutil que el título */
+    font-style: italic;                         /* Texto en cursiva */
+}
+
+/* ========================================== */
+/* ANIMACIONES */
+/* ========================================== */
+
+/* 
+ * Animación de aparición desde abajo
+ * Se aplica al contenido del hero cuando la página se carga
+ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;                    /* Comienza completamente transparente */
+        transform: translateY(30px);   /* Comienza 30px más abajo de su posición final */
+    }
+    to {
+        opacity: 1;                    /* Termina completamente opaco */
+        transform: translateY(0);      /* Termina en su posición original */
+    }
+}
+
+/* 
+ * Animación de rebote para el indicador de scroll
+ * Crea un efecto de "saltar" continuo para llamar la atención
+ */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { 
+        transform: translateX(-50%) translateY(0);  /* Posición normal (centrado horizontalmente) */
+    }
+    40% { 
+        transform: translateX(-50%) translateY(-20px); /* Rebote hacia arriba 20px */
+    }
+    60% { 
+        transform: translateX(-50%) translateY(-10px); /* Rebote intermedio 10px */
+    }
+}
+
+/* 
+ * Animación simple de aparición
+ * Solo cambia la opacidad de 0 a 1
+ */
+@keyframes fadeIn {
+    from { 
+        opacity: 0;  /* Comienza invisible */
+    }
+    to { 
+        opacity: 1;  /* Termina visible */
+    }
+}
+
+/* 
+ * Animación de flotación suave para las imágenes decorativas
+ * Simula el movimiento de las imágenes flotando en el aire
+ */
+@keyframes towerFloat {
+    0%, 100% { 
+        transform: rotate(4deg) translateY(0);    /* Posición normal con rotación de 4 grados */
+    }
+    50% { 
+        transform: rotate(4deg) translateY(-15px); /* Se eleva 15px manteniendo la rotación */
+    }
+}
+
+/* ========================================== */
+/* INDICADOR DE SCROLL */
+/* ========================================== */
+
+/* 
+ * Indicador visual que sugiere al usuario que puede hacer scroll hacia abajo
+ * Aparece en la parte inferior del hero
+ */
+.scroll-indicator {
+    position: absolute;              /* Posicionamiento absoluto respecto al hero */
+    bottom: 30px;                   /* 30px desde la parte inferior del hero */
+    left: 50%;                      /* Centrado horizontalmente */
+    transform: translateX(-50%);    /* Ajuste fino para centrado perfecto */
+    animation: bounce 2s infinite;  /* Aplica animación de rebote cada 2 segundos, infinitamente */
+    z-index: 3;                     /* Por encima de otros elementos */
+}
+
+/* 
+ * Pseudo-elemento que crea la flecha del indicador
+ * Se genera automáticamente después del elemento .scroll-indicator
+ */
+.scroll-indicator::after {
+    content: '↓';                   /* Símbolo de flecha hacia abajo */
+    font-size: 2rem;                /* Tamaño de fuente grande (32px) */
+    color: #000000;                 /* Color negro */
+}
+
+/* ========================================== */
+/* CAROUSEL SECTION - Galería deslizante */
+/* ========================================== */
+
+/* 
+ * Sección completa que contiene el carousel de videos
+ * Tiene padding para separación de otras secciones
+ */
+.carousel-section {
+    padding: 80px 20px;             /* 80px arriba/abajo, 20px izquierda/derecha */
+    background: #ffffff00;          /* Fondo transparente (hex con alpha 00) */
+}
+
+/* 
+ * Título principal de la sección del carousel
+ * "Beauty of Italy"
+ */
+.carousel-section h2 {
+    text-align: center;             /* Centrado horizontalmente */
+    font-size: 3rem;                /* Tamaño de fuente grande (48px) */
+    margin-bottom: 50px;            /* Espacio inferior de 50px */
+    color: #009246;                 /* Verde italiano */
+    position: relative;             /* Permite posicionamiento del pseudo-elemento */
+    display: inline-block;          /* Permite centrado con transform */
+    left: 50%;                      /* Mueve el elemento al 50% del contenedor */
+    transform: translateX(-50%);    /* Centra perfectamente el elemento */
+}
+
+/* 
+ * Línea decorativa que aparece debajo del título
+ * Usa los colores de la bandera italiana
+ */
+.carousel-section h2::after {
+    content: '';                    /* Crea un elemento vacío */
+    position: absolute;             /* Posicionamiento absoluto respecto al h2 */
+    bottom: -10px;                  /* 10px debajo del texto del título */
+    left: 50%;                      /* Centrado horizontalmente */
+    transform: translateX(-50%);    /* Centrado perfecto */
+    width: 200px;                   /* Ancho de 200px */
+    height: 3px;                    /* Altura de 3px (línea delgada) */
+    /* Gradiente horizontal de verde a rojo (colores bandera italiana) */
+    background: linear-gradient(90deg, #009246, #ce2b37);
+}
+
+/* 
+ * Contenedor principal que envuelve todo el carousel
+ * Define el área visible y las sombras
+ */
+.carousel-container {
+    max-width: 2000px;              /* Ancho máximo de 2000px */
+    margin: 0 auto;                 /* Centrado horizontalmente */
+    position: relative;             /* Permite posicionamiento absoluto de controles */
+    overflow: hidden;               /* Oculta slides que están fuera del área visible */
+    border-radius: 20px;            /* Esquinas redondeadas de 20px */
+    /* Sombra pronunciada: 0px horizontal, 20px vertical, 60px difuminado, 20% opacidad negra */
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+/* 
+ * Contenedor de todos los slides del carousel
+ * Usa flexbox para alinear los slides horizontalmente
+ */
+.carousel {
+    display: flex;                  /* Activa flexbox para alineación horizontal */
+    /* Transición suave personalizada: 0.8s de duración, curva de animación personalizada */
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 
+ * Cada slide individual del carousel
+ * Contiene un video y su caption correspondiente
+ */
+.carousel-item {
+    min-width: 100%;                /* Cada slide ocupa exactamente el 100% del contenedor */
+    height: 600px;                  /* Altura fija de 600px */
+    position: relative;             /* Permite posicionamiento absoluto del video y caption */
+    overflow: hidden;               /* Oculta cualquier contenido que se salga */
+}
+
+/* 
+ * Videos dentro de cada slide del carousel
+ * Se posicionan para llenar completamente el slide
+ */
+.carousel-item video {
+    position: absolute;             /* Posicionamiento absoluto respecto al carousel-item */
+    top: 0;                         /* Pegado a la parte superior */
+    left: 0;                        /* Pegado a la parte izquierda */
+    width: 100%;                    /* Ancho completo del slide */
+    height: 100%;                   /* Altura completa del slide */
+    object-fit: cover;              /* Ajusta el video manteniendo proporción, recortando si es necesario */
+    z-index: 0;                     /* Por debajo del caption */
+}
+
+/* 
+ * Imágenes dentro de los slides (si las hay)
+ * Estilos alternativos para cuando se usen imágenes en lugar de videos
+ */
+.carousel-item img {
+    width: 100%;                    /* Ancho completo del slide */
+    height: 100%;                   /* Altura completa del slide */
+    object-fit: cover;              /* Ajusta la imagen sin distorsión, recortando si es necesario */
+}
+
+/* 
+ * Contenedor del texto descriptivo de cada slide
+ * Aparece en la parte inferior con un fondo degradado
+ */
+.carousel-caption {
+    position: absolute;             /* Posicionamiento absoluto respecto al carousel-item */
+    bottom: 0;                      /* Pegado a la parte inferior del slide */
+    left: 0;                        /* Pegado a la parte izquierda */
+    right: 0;                       /* Se extiende hasta la parte derecha */
+    /* Degradado vertical: transparente arriba, negro semitransparente abajo */
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;                   /* Texto blanco para contraste */
+    padding: 40px 30px 30px;        /* 40px arriba, 30px izquierda/derecha, 30px abajo */
+    transform: translateY(100%);    /* Inicialmente oculto debajo del slide */
+    transition: transform 0.5s ease; /* Transición suave de 0.5 segundos */
+}
+
+/* 
+ * Estado hover del caption - muestra el texto cuando se pasa el mouse
+ */
+.carousel-item:hover .carousel-caption {
+    transform: translateY(0);       /* Mueve el caption a su posición normal (visible) */
+}
+
+/* 
+ * Título dentro del caption (nombre de la ciudad)
+ */
+.carousel-caption h3 {
+    font-size: 2rem;                /* Tamaño de fuente grande (32px) */
+    margin-bottom: 10px;            /* Espacio inferior de 10px */
+}
+
+/* 
+ * Párrafo dentro del caption (descripción de la ciudad)
+ */
+.carousel-caption p {
+    font-size: 1.1rem;              /* Tamaño de fuente ligeramente mayor al normal (17.6px) */
+}
+
+/* ========================================== */
+/* CONTROLES DEL CAROUSEL */
+/* ========================================== */
+
+/* 
+ * Contenedor de los botones de navegación
+ * Se posiciona relativo para contener los controles absolutos
+ */
+.botones {
+    position: relative;             /* Permite posicionamiento absoluto de los controles */
+    max-width: 1000px;              /* Ancho máximo de 1000px */
+    margin: 0 auto;                 /* Centrado horizontalmente */
+}
+
+/* 
+ * Contenedor de los botones de navegación (anterior/siguiente)
+ * Se posiciona debajo del carousel
+ */
+.carousel-controls {
+    position: absolute;             /* Posicionamiento absoluto respecto a .botones */
+    top: 100%;                      /* Comienza justo debajo del carousel */
+    width: 100%;                    /* Ancho completo del contenedor padre */
+    display: flex;                  /* Activa flexbox para alinear botones */
+    justify-content: space-between; /* Distribuye botones en extremos opuestos */
+    transform: translateY(-50%);    /* Mueve hacia arriba 50% para centrado vertical */
+    padding: 20px;                  /* Espaciado interno de 20px */
+}
+
+/* 
+ * Botones individuales de navegación (‹ y ›)
+ * Estilo circular con efectos hover
+ */
+.carousel-btn {
+    background: rgba(255,255,255,0.9); /* Fondo blanco con 90% de opacidad */
+    border: none;                   /* Sin borde */
+    width: 50px;                    /* Ancho fijo de 50px */
+    height: 50px;                   /* Altura fija de 50px */
+    border-radius: 50%;             /* Forma circular perfecta */
+    font-size: 1.5rem;              /* Tamaño de fuente grande (24px) */
+    cursor: pointer;                /* Cursor de mano al pasar el mouse */
+    transition: all 0.3s ease;      /* Transición suave de 0.3s para todos los cambios */
+    /* Sombra: 0px horizontal, 5px vertical, 15px difuminado, 20% opacidad negra */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* 
+ * Estado hover de los botones de navegación
+ * Cambia color y tamaño al pasar el mouse
+ */
+.carousel-btn:hover {
+    background: #009246;            /* Fondo verde italiano */
+    color: white;                   /* Texto blanco */
+    transform: scale(1.1);          /* Aumenta el tamaño 10% */
+}
+
+/* 
+ * Contenedor de los indicadores de posición (puntos)
+ * Se centra debajo del carousel
+ */
+.carousel-indicators {
+    text-align: center;             /* Centra los indicadores horizontalmente */
+    margin-top: 30px;               /* Espacio superior de 30px */
+}
+
+/* 
+ * Indicadores individuales (puntos que muestran la posición actual)
+ * Estado normal (inactivo)
+ */
+.indicator {
+    display: inline-block;          /* Permite alineación horizontal */
+    width: 12px;                    /* Ancho de 12px */
+    height: 12px;                   /* Altura de 12px */
+    background: #ccc;               /* Color gris claro */
+    border-radius: 50%;             /* Forma circular */
+    margin: 0 8px;                  /* 8px de margen izquierdo y derecho */
+    cursor: pointer;                /* Cursor de mano al pasar el mouse */
+    transition: all 0.3s ease;      /* Transición suave de 0.3s */
+}
+
+/* 
+ * Estado activo del indicador
+ * Se aplica al indicador que corresponde al slide actual
+ */
+.indicator.active {
+    background: #009246;            /* Fondo verde italiano */
+    width: 30px;                    /* Ancho expandido de 30px */
+    border-radius: 6px;             /* Forma rectangular redondeada */
+}
+
+/* ========================================== */
+/* CULTURE SECTION - Sección sobre cultura italiana */
+/* ========================================== */
+
+/* 
+ * Sección completa de cultura italiana
+ * Tiene el mismo gradiente de fondo que el body
+ */
+.culture-section {
+    padding: 100px 20px;            /* 100px arriba/abajo, 20px izquierda/derecha */
+    /* Mismo gradiente de la bandera italiana que el body */
+    background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
+}
+
+/* 
+ * Contenedor principal de la sección de cultura
+ * Limita el ancho máximo y centra el contenido
+ */
+.culture-container {
+    max-width: 1200px;              /* Ancho máximo de 1200px */
+    margin: 0 auto;                 /* Centrado horizontalmente */
+}
+
+/* 
+ * Encabezado de la sección de cultura
+ * Contiene el título y subtítulo
+ */
+.culture-header {
+    text-align: center;             /* Centrado horizontalmente */
+    margin-bottom: 60px;            /* Espacio inferior de 60px */
+    animation: fadeIn 1s ease;      /* Animación de aparición de 1 segundo */
+}
+
+/* 
+ * Título principal de la sección de cultura
+ * "Italian Culture"
+ */
+.culture-header h2 {
+    font-size: 3rem;                /* Tamaño de fuente grande (48px) */
+    color: #009246;                 /* Verde italiano */
+    margin-bottom: 20px;            /* Espacio inferior de 20px */
+}
+
+/* 
+ * Subtítulo de la sección de cultura
+ * "A Legacy of Art, Passion, and Tradition"
+ */
+.culture-header .subtitle {
+    font-size: 1.3rem;              /* Tamaño de fuente mediano (20.8px) */
+    color: #666;                    /* Color gris medio */
+    font-style: italic;             /* Texto en cursiva */
+}
+
+/* 
+ * Grid de tarjetas de cultura
+ * Layout responsive que se adapta al tamaño de pantalla
+ */
+.culture-grid {
+    /* Grid responsive: columnas automáticas con ancho mínimo de 300px */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;                      /* Espacio de 40px entre tarjetas */
+    margin-top: 50px;               /* Espacio superior de 50px */
+}
+
+/* 
+ * Tarjetas individuales de cultura
+ * Cada una representa un aspecto de la cultura italiana
+ */
+.culture-card {
+    background: white;              /* Fondo blanco */
+    padding: 40px;                  /* Espaciado interno de 40px */
+    border-radius: 15px;            /* Esquinas redondeadas de 15px */
+    /* Sombra: 0px horizontal, 10px vertical, 30px difuminado, 10% opacidad negra */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;      /* Transición suave de 0.4s para todos los cambios */
+    position: relative;             /* Permite posicionamiento del pseudo-elemento */
+    overflow: hidden;               /* Oculta el pseudo-elemento que se sale */
+}
+
+/* 
+ * Línea decorativa superior de las tarjetas
+ * Se crea con un pseudo-elemento
+ */
+.culture-card::before {
+    content: '';                    /* Crea un elemento vacío */
+    position: absolute;             /* Posicionamiento absoluto respecto a la tarjeta */
+    top: 0;                         /* Pegado a la parte superior */
+    left: 0;                        /* Pegado a la parte izquierda */
+    width: 100%;                    /* Ancho completo de la tarjeta */
+    height: 5px;                    /* Altura de 5px (línea delgada) */
+    /* Gradiente horizontal de verde a rojo (colores bandera italiana) */
+    background: linear-gradient(90deg, #009246, #ce2b37);
+    transform: scaleX(0);           /* Inicialmente oculto (ancho 0) */
+    transition: transform 0.4s ease; /* Transición suave de 0.4s */
+}
+
+/* 
+ * Estado hover de las tarjetas
+ * Muestra la línea decorativa y eleva la tarjeta
+ */
+.culture-card:hover::before {
+    transform: scaleX(1);           /* Muestra la línea (ancho completo) */
+}
+
+.culture-card:hover {
+    transform: translateY(-10px);   /* Eleva la tarjeta 10px hacia arriba */
+    /* Sombra más pronunciada: 0px horizontal, 20px vertical, 40px difuminado, 15% opacidad */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* 
+ * Iconos emoji de las tarjetas de cultura
+ * 🎨 🍝 🎭
+ */
+.culture-icon {
+    font-size: 3rem;                /* Tamaño de fuente muy grande (48px) */
+    margin-bottom: 20px;            /* Espacio inferior de 20px */
+    display: block;                 /* Hace que el emoji ocupe toda la línea */
+}
+
+/* 
+ * Títulos de las tarjetas de cultura
+ * "Artistic Heritage", "Culinary Excellence", "Living Traditions"
+ */
+.culture-card h3 {
+    font-size: 1.8rem;              /* Tamaño de fuente grande (28.8px) */
+    color: #009246;                 /* Verde italiano */
+    margin-bottom: 15px;            /* Espacio inferior de 15px */
+}
+
+/* 
+ * Párrafos descriptivos de las tarjetas
+ * Contienen la información detallada sobre cada aspecto cultural
+ */
+.culture-card p {
+    font-size: 1.1rem;              /* Tamaño de fuente ligeramente mayor (17.6px) */
+    line-height: 1.8;               /* Espaciado entre líneas de 1.8 (más legible) */
+    color: #555;                    /* Color gris oscuro para mejor legibilidad */
+}
+
+/* ========================================== */
+/* FOOTER - Pie de página */
+/* ========================================== */
+
+/* 
+ * Pie de página completo
+ * Tiene el mismo gradiente de fondo que el resto de la página
+ */
+footer {
+    /* Mismo gradiente de la bandera italiana */
+    background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
+    padding: 30px 20px 20px;        /* 30px arriba, 20px izquierda/derecha, 20px abajo (compacto) */
+    text-align: center;             /* Centrado horizontalmente */
+    color: #000;                    /* Color de texto negro */
+    position: relative;             /* Permite posicionamiento del pseudo-elemento de fondo */
+    overflow: hidden;               /* Oculta el patrón de fondo que se sale */
+    /* Sombra superior: 0px horizontal, -5px vertical, 20px difuminado, 20% opacidad */
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
+}
+
+/* 
+ * Patrón de fondo animado del footer
+ * Crea un efecto visual sutil con puntos
+ */
+footer::before {
+    content: '';                    /* Crea un elemento vacío */
+    position: absolute;             /* Posicionamiento absoluto respecto al footer */
+    top: 0;                         /* Pegado a la parte superior */
+    left: 0;                        /* Pegado a la parte izquierda */
+    width: 200%;                    /* Ancho doble para permitir movimiento */
+    height: 200%;                   /* Altura doble para permitir movimiento */
+    /* Patrón de puntos: círculos blancos semitransparentes de 1px */
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+    background-size: 50px 50px;     /* Tamaño de cada punto: 50x50px */
+    animation: movePattern 20s linear infinite; /* Animación de movimiento de 20s, infinita */
+    z-index: 0;                     /* Por debajo del contenido del footer */
+}
+
+/* 
+ * Contenedor principal del footer
+ * Organiza todo el contenido del pie de página
+ */
+.footer-container {
+    position: relative;             /* Permite que esté por encima del patrón de fondo */
+    z-index: 1;                     /* Por encima del pseudo-elemento de fondo */
+    max-width: 1200px;              /* Ancho máximo de 1200px */
+    margin: 0 auto;                 /* Centrado horizontalmente */
+}
+
+/* 
+ * Lema principal del footer
+ * "La Dolce Vita — Vive, Ama y Disfruta"
+ */
+.footer-tagline {
+    font-size: 1.2rem;              /* Tamaño de fuente mediano (19.2px) */
+    font-style: italic;             /* Texto en cursiva */
+    color: #000;                    /* Color negro */
+    margin-bottom: 20px;            /* Espacio inferior de 20px */
+    font-weight: bold;              /* Texto en negrita */
+    /* Sombra de texto: 1px horizontal, 1px vertical, 3px difuminado, 10% opacidad */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+/* 
+ * Sección que contiene la información del equipo
+ * Grid responsive para los miembros del equipo
+ */
+.team-section {
+    /* Grid responsive: columnas automáticas con ancho mínimo de 200px */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0px;                       /* Sin espacio entre elementos */
+    margin-bottom: 20px;            /* Espacio inferior de 20px */
+}
+
+/* 
+ * Contenedor de cada miembro del equipo
+ * Lino y Brayan
+ */
+.team-member {
+    padding: 3px;                   /* Espaciado interno mínimo de 3px */
+    border-radius: 15px;            /* Esquinas redondeadas de 15px */
+    backdrop-filter: blur(10px);    /* Efecto de desenfoque de fondo */
+    transition: all 0.3s ease;      /* Transición suave de 0.3s */
+}
+
+/* 
+ * Estado hover de los miembros del equipo
+ * Eleva el elemento y agrega fondo semitransparente
+ */
+.team-member:hover {
+    transform: translateY(-5px);    /* Eleva el elemento 5px */
+    background: rgba(255,255,255,0.5); /* Fondo blanco con 50% de opacidad */
+    /* Sombra: 0px horizontal, 10px vertical, 25px difuminado, 15% opacidad */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* 
+ * Nombres de los miembros del equipo
+ * "Lino" y "Brayan"
+ */
+.member-name {
+    font-size: 1.1rem;              /* Tamaño de fuente ligeramente mayor (17.6px) */
+    font-weight: bold;              /* Texto en negrita */
+    color: #000;                    /* Color negro */
+    margin-bottom: 10px;            /* Espacio inferior de 10px */
+    /* Sombra de texto: 1px horizontal, 1px vertical, 2px difuminado, 10% opacidad */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* 
+ * Contenedor de los enlaces sociales
+ * Centra los iconos de Instagram
+ */
+.member-socials {
+    display: flex;                  /* Activa flexbox para alineación horizontal */
+    justify-content: center;        /* Centra los enlaces horizontalmente */
+    gap: 15px;                      /* Espacio de 15px entre enlaces */
+}
+
+/* 
+ * Enlaces a redes sociales
+ * Enlaces a Instagram de cada miembro
+ */
+.social-link {
+    color: #000;                    /* Color negro por defecto */
+    transition: all 0.3s ease;      /* Transición suave de 0.3s */
+    display: inline-block;          /* Permite transformaciones */
+}
+
+/* 
+ * Estado hover de los enlaces sociales
+ * Cambia color y aumenta el tamaño
+ */
+.social-link:hover {
+    color: #009246;                 /* Verde italiano al hacer hover */
+    transform: scale(1.2);          /* Aumenta el tamaño 20% */
+}
+
+/* 
+ * Iconos SVG de Instagram
+ * Tamaño fijo para consistencia visual
+ */
+.icon {
+    width: 28px;                    /* Ancho fijo de 28px */
+    height: 28px;                   /* Altura fija de 28px */
+}
+
+/* 
+ * Copyright del footer
+ * "© 2025 - Ricardo Bravo Lino"
+ */
+.footer-copy {
+    font-size: 0.85rem;             /* Tamaño de fuente pequeño (13.6px) */
+    color: #000;                    /* Color negro */
+    opacity: 0.8;                   /* 80% de opacidad (más sutil) */
+    font-family: 'Georgia', serif;  /* Misma fuente que el body */
+    margin-top: 15px;               /* Espacio superior de 15px */
+    padding-top: 10px;              /* Espaciado interno superior de 10px */
+    border-top: 2px solid rgba(0,0,0,0.2); /* Línea separadora superior de 2px, 20% opacidad */
+}
+
+/* ========================================== */
+/* IMÁGENES DECORATIVAS */
+/* ========================================== */
+
+/* 
+ * Imagen decorativa en la esquina superior izquierda
+ * Contiene img.jpg
+ */
+.tower-container-1 {
+    position: absolute;             /* Posicionamiento absoluto respecto al hero */
+    top: 20px;                      /* 20px desde la parte superior */
+    left: 20px;                     /* 20px desde la parte izquierda */
+    width: 120px;                   /* Ancho fijo de 120px */
+    height: 120px;                  /* Altura fija de 120px */
+    z-index: 1;                     /* Por encima del fondo pero debajo del contenido */
+    border-radius: 15px;            /* Esquinas redondeadas de 15px */
+    overflow: hidden;               /* Oculta cualquier parte de la imagen que se salga */
+    /* Sombra: 0px horizontal, 5px vertical, 15px difuminado, 20% opacidad */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    animation: towerFloat 6s ease-in-out infinite; /* Animación de flotación de 6s, infinita */
+}
+
+/* 
+ * Imagen decorativa en la esquina inferior derecha
+ * Contiene image.png (Torre de Pisa)
+ */
+.tower-container-2 {
+    position: absolute;             /* Posicionamiento absoluto respecto al hero */
+    bottom: 20px;                   /* 20px desde la parte inferior */
+    right: 20px;                    /* 20px desde la parte derecha */
+    width: 120px;                   /* Ancho fijo de 120px */
+    height: 120px;                  /* Altura fija de 120px */
+    z-index: 1;                     /* Por encima del fondo pero debajo del contenido */
+    border-radius: 15px;            /* Esquinas redondeadas de 15px */
+    overflow: hidden;               /* Oculta cualquier parte de la imagen que se salga */
+    /* Sombra: 0px horizontal, 5px vertical, 15px difuminado, 20% opacidad */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    animation: towerFloat 6s ease-in-out infinite; /* Animación de flotación de 6s, infinita */
+}
+
+/* 
+ * Contenedor original para compatibilidad
+ * Mantiene estilos para elementos que puedan usar esta clase
+ */
+.tower-container {
+    position: absolute;             /* Posicionamiento absoluto respecto al hero */
+    right: 5%;                      /* 5% desde la parte derecha */
+    bottom: 0;                      /* Pegado a la parte inferior */
+    width: 140px;                   /* Ancho fijo de 140px */
+    z-index: 1;                     /* Por encima del fondo pero debajo del contenido */
+    transform: translateY(0);       /* Sin transformación inicial */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Transiciones suaves */
+    animation: towerFloat 6s ease-in-out infinite; /* Animación de flotación de 6s, infinita */
+}
+
+/* 
+ * Estilos aplicados a todas las imágenes decorativas
+ * img.jpg e image.png
+ */
+.tower-image {
+    width: 100%;                    /* Ancho completo del contenedor */
+    height: auto;                   /* Altura automática para mantener proporción */
+    transform: rotate(4deg);        /* Rotación de 4 grados (efecto de inclinación) */
+    /* Sombra de imagen: 0px horizontal, 10px vertical, 15px difuminado, 25% opacidad */
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.25));
+    border-radius: 12px;            /* Esquinas redondeadas de 12px */
+}
+
+/* ========================================== */
+/* MEDIA QUERIES - Diseño responsive */
+/* ========================================== */
+
+/* 
+ * Dispositivos grandes - computadoras de escritorio
+ * Pantallas de 1200px o más de ancho
+ */
+@media (min-width: 1200px) {
+    .carousel-item {
+        height: 700px;              /* Altura mayor para pantallas grandes (700px) */
+    }
+    
+    .carousel-item video {
+        width: 100%;                /* Ancho completo del slide */
+        height: 100%;               /* Altura completa del slide */
+    }
+    
+    .tower-container-1,
+    .tower-container-2 {
+        width: 150px;               /* Imágenes más grandes en pantallas grandes */
+        height: 150px;              /* Imágenes más grandes en pantallas grandes */
+    }
+}
+
+/* 
+ * Tablets y dispositivos medianos
+ * Pantallas de 768px o menos de ancho
+ */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3.5rem;          /* Título más pequeño en tablets (56px) */
+    }
+
+    .hero p {
+        font-size: 1.3rem;          /* Subtítulo más pequeño en tablets (20.8px) */
+    }
+
+    .tower-container {
+        right: 5%;                  /* 5% desde la derecha */
+        bottom: 15%;                /* 15% desde la parte inferior */
+        transform: rotate(4deg) scale(0.7); /* Rotación de 4° y escala de 70% */
+    }
+
+    .tower-container-1,
+    .tower-container-2 {
+        width: 100px;               /* Imágenes más pequeñas en tablets */
+        height: 100px;              /* Imágenes más pequeñas en tablets */
+    }
+
+    .carousel-item {
+        height: 400px;              /* Altura reducida del carousel en tablets (400px) */
+    }
+    
+    .carousel-item video {
+        width: 100%;                /* Ancho completo del slide */
+        height: 100%;               /* Altura completa del slide */
+        object-fit: cover;          /* Ajusta el video manteniendo proporción */
+    }
+
+    .carousel-caption h3 {
+        font-size: 1.5rem;          /* Título del caption más pequeño (24px) */
+    }
+
+    .carousel-caption p {
+        font-size: 0.95rem;         /* Párrafo del caption más pequeño (15.2px) */
+    }
+
+    .culture-header h2 {
+        font-size: 2rem;            /* Título de cultura más pequeño (32px) */
+    }
+
+    .culture-grid {
+        grid-template-columns: 1fr; /* Una sola columna en tablets */
+        gap: 25px;                  /* Espacio reducido entre tarjetas (25px) */
+    }
+
+    .culture-card {
+        padding: 30px;              /* Padding reducido en tarjetas (30px) */
+    }
+
+    .footer-tagline {
+        font-size: 1.2rem;          /* Lema del footer más pequeño (19.2px) */
+    }
+
+    .team-section {
+        grid-template-columns: 1fr; /* Una sola columna para el equipo */
+        gap: 20px;                  /* Espacio de 20px entre miembros */
+    }
+
+    .carousel-btn {
+        width: 40px;                /* Botones más pequeños (40px) */
+        height: 40px;               /* Botones más pequeños (40px) */
+        font-size: 1.2rem;          /* Texto de botones más pequeño (19.2px) */
+    }
+}
+
+/* 
+ * Dispositivos móviles pequeños
+ * Pantallas de 480px o menos de ancho
+ */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.5rem;          /* Título aún más pequeño en móviles (40px) */
+    }
+
+    .hero p {
+        font-size: 1rem;            /* Subtítulo más pequeño en móviles (16px) */
+    }
+
+    .tower-container {
+        transform: rotate(4deg) scale(0.5); /* Rotación de 4° y escala de 50% */
+        right: 2%;                  /* 2% desde la derecha */
+        bottom: 18%;                /* 18% desde la parte inferior */
+    }
+
+    .tower-container-1,
+    .tower-container-2 {
+        width: 80px;                /* Imágenes más pequeñas en móviles */
+        height: 80px;               /* Imágenes más pequeñas en móviles */
+    }
+
+    .carousel-item {
+        height: 300px;              /* Altura aún más reducida para móviles (300px) */
+    }
+    
+    .carousel-item video {
+        width: 100%;                /* Ancho completo del slide */
+        height: 100%;               /* Altura completa del slide */
+        object-fit: cover;          /* Ajusta el video manteniendo proporción */
+    }
+
+    .carousel-section h2 {
+        font-size: 2rem;            /* Título del carousel más pequeño (32px) */
+    }
+
+    .culture-header h2 {
+        font-size: 1.8rem;          /* Título de cultura más pequeño (28.8px) */
+    }
+
+    .culture-card h3 {
+        font-size: 1.5rem;          /* Títulos de tarjetas más pequeños (24px) */
+    }
+
+    .member-name {
+        font-size: 1.1rem;          /* Nombres de miembros más pequeños (17.6px) */
+    }
+
+    .icon {
+        width: 24px;                /* Iconos más pequeños (24px) */
+        height: 24px;               /* Iconos más pequeños (24px) */
+    }
+}

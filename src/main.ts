@@ -68,6 +68,8 @@ function goToSlide(index: number) {
 
 
 function restartAutoAdvance() {
+    // Función placeholder - el auto-avance fue removido por el usuario
+    // Si se quiere reactivar, descomentar las funciones de auto-avance
 }
 
 // SCROLL SUAVE AL HACER CLIC EN EL INDICADOR

@@ -1,77 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discover Italy - La Dolce Vita</title>
-    
+    <!-- Favicon personalizado con colores de la bandera italiana -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
-    <!-- Hero Section - Sección principal -->
+    <!-- ========================================== -->
+    <!-- HERO SECTION - Sección principal de la página -->
+    <!-- ========================================== -->
     <section class="hero">
-
+        <!-- Imagen decorativa en esquina superior izquierda -->
         <div class="tower-container-1">
-            <img src="img.jpg" class="tower-image" style="width:100%; height:auto;">
+            <img src="/img.jpg" class="tower-image" alt="Imagen decorativa Italia">
         </div>
 
+        <!-- Contenido principal del hero -->
         <div class="hero-content">
             <h1>Discover Italy</h1>
             <p><strong>La Dolce Vita Awaits</strong></p>
         </div>
 
-        <!-- Imagen real de la Torre de Pisa con efecto parallax -->
+        <!-- Imagen decorativa en esquina inferior derecha -->
         <div class="tower-container-2">
-            <img src="image.png" alt="Leaning Tower of Pisa" class="tower-image" style="width:100%; height:auto;">
+            <img src="/image.png" alt="Leaning Tower of Pisa" class="tower-image">
         </div>
 
+        <!-- Indicador de scroll animado -->
         <div class="scroll-indicator"></div>
     </section>
 
-    <!-- Carousel Section - Galería deslizante de lugares -->
+    <!-- ========================================== -->
+    <!-- CAROUSEL SECTION - Galería deslizante de videos -->
+    <!-- ========================================== -->
     <section class="carousel-section">
         <h2>Beauty of Italy</h2>
-        <div>
-
-            <div class="carousel-container">
+        
+        <!-- Contenedor principal del carousel -->
+        <div class="carousel-container">
+            <!-- Carousel con 6 videos de diferentes ciudades italianas -->
             <div class="carousel" id="carousel">
+                <!-- Video 1: Italia general -->
                 <div class="carousel-item">
-                    <!-- Video decorativo posicionado absolutamente -->
-                    <video src="/1.mp4" autoplay loop muted style="position:absolute; right:0; bottom:0; width:340px; height:auto;  z-index:0; "></video>
+                    <video src="/1.mp4" autoplay loop muted></video>
                     <div class="carousel-caption">
                         <h3>Italy</h3>
                         <p></p>
                     </div>
                 </div>
+                
+                <!-- Video 2: Venecia -->
                 <div class="carousel-item">
-                    <video src="/2.mp4" autoplay loop muted style="position:absolute; right:0; bottom:0; width:340px; height:auto;  z-index:0; "></video>
+                    <video src="/2.mp4" autoplay loop muted></video>
                     <div class="carousel-caption">
                         <h3>Venice</h3>
                         <p></p>
                     </div>
                 </div>
+                
+                <!-- Video 3: Florencia -->
                 <div class="carousel-item">
-                    <video src="/3.mp4" autoplay loop muted style="position:absolute; right:0; bottom:0; width:340px; height:auto;  z-index:0; "></video>
+                    <video src="/3.mp4" autoplay loop muted></video>
                     <div class="carousel-caption">
                         <h3>Florence</h3>
                         <p></p>
                     </div>
                 </div>
+                
+                <!-- Video 4: Roma -->
                 <div class="carousel-item">
-                    <video src="/4.mp4" autoplay loop muted style="position:absolute; right:0; bottom:0; width:340px; height:auto;  z-index:0; "></video>
+                    <video src="/4.mp4" autoplay loop muted></video>
                     <div class="carousel-caption">
                         <h3>Roma</h3>
                         <p></p>
                     </div>
                 </div>
+                
+                <!-- Video 5: Torre de Pisa -->
                 <div class="carousel-item">
-                    <video src="/5.mp4" autoplay loop muted style="position:absolute; right:0; bottom:0; width:340px; height:auto;  z-index:0; "></video>
+                    <video src="/5.mp4" autoplay loop muted></video>
                     <div class="carousel-caption">
                         <h3>Leaning Tower of Pisa</h3>
                         <p></p>
                     </div>
                 </div>
+                
+                <!-- Video 6: Milán -->
                 <div class="carousel-item">
-                    <video src="/6.mp4" autoplay loop muted style="position:absolute; right:0; bottom:0; width:340px; height:auto;  z-index:0; "></video>
+                    <video src="/6.mp4" autoplay loop muted></video>
                     <div class="carousel-caption">
                         <h3>Milan</h3>
                         <p></p>
@@ -79,41 +98,49 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Controles de navegación del carousel -->
         <div class="botones"> 
-            <!-- Controles de navegación del carousel --> 
             <div class="carousel-controls">
+                <!-- Botón para ir al slide anterior -->
                 <button class="carousel-btn" onclick="prevSlide()">‹</button>
+                <!-- Botón para ir al slide siguiente -->
                 <button class="carousel-btn" onclick="nextSlide()">›</button>
             </div>
         </div>
-        </div>
         
-        <!-- Indicadores de posición -->
+        <!-- Indicadores de posición (se generan dinámicamente con JavaScript) -->
         <div class="carousel-indicators" id="indicators"></div>
-        
     </section>
 
-    <!-- Culture Section - Sección sobre cultura italiana -->
+    <!-- ========================================== -->
+    <!-- CULTURE SECTION - Sección sobre cultura italiana -->
+    <!-- ========================================== -->
     <section class="culture-section">
         <div class="culture-container">
+            <!-- Encabezado de la sección -->
             <div class="culture-header">
                 <h2>Italian Culture</h2>
                 <p class="subtitle">A Legacy of Art, Passion, and Tradition</p>
             </div>
 
+            <!-- Grid de tarjetas de cultura -->
             <div class="culture-grid">
+                <!-- Tarjeta 1: Patrimonio Artístico -->
                 <div class="culture-card">
                     <span class="culture-icon">🎨</span>
                     <h3>Artistic Heritage</h3>
                     <p>Italy is the birthplace of the Renaissance, home to legendary artists like Leonardo da Vinci, Michelangelo, and Raphael. From the Sistine Chapel to the Uffizi Gallery, Italian art has shaped Western civilization and continues to inspire millions of visitors each year.</p>
                 </div>
 
+                <!-- Tarjeta 2: Excelencia Culinaria -->
                 <div class="culture-card">
                     <span class="culture-icon">🍝</span>
                     <h3>Culinary Excellence</h3>
                     <p>Italian cuisine is celebrated worldwide for its simplicity and quality. From handmade pasta and wood-fired pizza to rich gelato and fine wines, every region offers unique flavors. Food in Italy is not just sustenance—it's a celebration of life, family, and tradition.</p>
                 </div>
 
+                <!-- Tarjeta 3: Tradiciones Vivas -->
                 <div class="culture-card">
                     <span class="culture-icon">🎭</span>
                     <h3>Living Traditions</h3>
@@ -123,40 +150,49 @@
         </div>
     </section>
 
-    <!-- Footer - Pie de página -->
+    <!-- ========================================== -->
+    <!-- FOOTER - Pie de página con información del equipo -->
+    <!-- ========================================== -->
     <footer>
-    <div class="footer-container">
-        <p class="footer-tagline">"La Dolce Vita — Vive, Ama y Disfruta"</p>
+        <div class="footer-container">
+            <!-- Lema del sitio -->
+            <p class="footer-tagline">"La Dolce Vita — Vive, Ama y Disfruta"</p>
 
-        <div class="team-section">
-            <div class="team-member">
-                <p class="member-name">Lino</p>
-                <div class="member-socials">
-                    <!-- Enlace a Instagram con SVG -->
-                    <a href="https://www.instagram.com/linooo_trb_/" target="_blank" aria-label="Instagram" class="social-link">
-                        <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 3.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm6.406-1.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
+            <!-- Sección del equipo -->
+            <div class="team-section">
+                <!-- Miembro del equipo: Lino -->
+                <div class="team-member">
+                    <p class="member-name">Lino</p>
+                    <div class="member-socials">
+                        <!-- Enlace a Instagram con icono SVG -->
+                        <a href="https://www.instagram.com/linooo_trb_/" target="_blank" aria-label="Instagram" class="social-link">
+                            <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 3.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm6.406-1.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Miembro del equipo: Brayan -->
+                <div class="team-member">
+                    <p class="member-name">Brayan</p>
+                    <div class="member-socials">
+                        <!-- Enlace a Instagram con icono SVG -->
+                        <a href="https://www.instagram.com/brayan_sg22?igsh=cDFubHNmcTVxaHp2&utm_source=qr" target="_blank" aria-label="Instagram" class="social-link">
+                            <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 3.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm6.406-1.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="team-member">
-                <p class="member-name">Brayan</p>
-                <div class="member-socials">
-                    <a href="https://www.instagram.com/brayan_sg22?igsh=cDFubHNmcTVxaHp2&utm_source=qr" target="_blank" aria-label="Instagram" class="social-link">
-                        <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 3.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm6.406-1.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+            <!-- Copyright -->
+            <p class="footer-copy">© 2025 - Ricardo Bravo Lino</p>
         </div>
+    </footer>
 
-        <p class="footer-copy">© 2025 - Ricardo Bravo Lino</p>
-    </div>
-</footer>
-
+    <!-- Script principal de TypeScript -->
     <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
