@@ -77,7 +77,7 @@ function manageVideos() {
 
 // NAVEGACIÓN DEL CAROUSEL CON PROTECCIÓN ANTI-LAG
 function nextSlide() {
-    if (totalSlides === 0 || isTransitioning) return; // PREVENIR CLICS DURANTE TRANSICIÓN
+    //if (totalSlides === 0 || isTransitioning) return; // PREVENIR CLICS DURANTE TRANSICIÓN
     
     isTransitioning = true;
     currentSlide = (currentSlide + 1) % totalSlides;
@@ -86,13 +86,13 @@ function nextSlide() {
     // LIBERAR DESPUÉS DE LA TRANSICIÓN (400ms = duración del CSS)
     setTimeout(() => {
         isTransitioning = false;
-    }, 100);
+    }, 0);
     
     restartAutoAdvance();
 }
 
 function prevSlide() {
-    if (totalSlides === 0 || isTransitioning) return; // PREVENIR CLICS DURANTE TRANSICIÓN
+    //if (totalSlides === 0 || isTransitioning) return; // PREVENIR CLICS DURANTE TRANSICIÓN
     
     isTransitioning = true;
     currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
@@ -101,7 +101,7 @@ function prevSlide() {
     // LIBERAR DESPUÉS DE LA TRANSICIÓN (400ms = duración del CSS)
     setTimeout(() => {
         isTransitioning = false;
-    }, 400);
+    }, 0);
     
     restartAutoAdvance();
 }
@@ -119,7 +119,7 @@ function goToSlide(index: number) {
     // LIBERAR DESPUÉS DE LA TRANSICIÓN (400ms = duración del CSS)
     setTimeout(() => {
         isTransitioning = false;
-    }, 400);
+    }, 0);
     
     restartAutoAdvance();
 }
