@@ -47,7 +47,8 @@ function preloadVideos() {
 
 // ACTUALIZACIÓN VISUAL DEL CAROUSEL
 function updateCarousel() {
-    if (!carousel || !indicators) return;
+    if (!carousel || !indicatorsContainer) return; //cambio
+
     
     // Desplazamiento horizontal con translate3d para aceleración GPU
     carousel.style.transform = `translate3d(-${currentSlide * 100}%, 0, 0)`;

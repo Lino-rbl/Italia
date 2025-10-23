@@ -394,12 +394,15 @@ body {
  * Cada slide individual del carousel
  * Contiene un video y su caption correspondiente
  */
-.carousel-item {
-    min-width: 100%;                /* Cada slide ocupa exactamente el 100% del contenedor */
-    height: 889px;                  /* Altura fija de 600px */
-    position: relative;             /* Permite posicionamiento absoluto del video y caption */
-    overflow: hidden;               /* Oculta cualquier contenido que se salga */
+.carousel-item video{
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  /* evita filter, transform, mix-blend-mode y border-radius en el <video> */
 }
+
 
 /* 
  * Videos dentro de cada slide del carousel
