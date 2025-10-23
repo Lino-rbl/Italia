@@ -204,7 +204,7 @@
  * Contenedor del contenido principal del hero
  * Contiene el título y subtítulo principales
  */
-        .hero-content {
+.hero-content {
     text-align: center;             /* Centra todo el texto horizontalmente */
     z-index: 2;                     /* Coloca este elemento por encima de las imágenes decorativas */
     animation: fadeInUp 1.5s ease;  /* Aplica animación de entrada que dura 1.5 segundos */
@@ -472,7 +472,7 @@
  * Contenedor de los botones de navegación
  * Se posiciona relativo para contener los controles absolutos
  */
-        .botones {
+.botones {
     position: relative;             /* Permite posicionamiento absoluto de los controles */
     max-width: 1000px;              /* Ancho máximo de 1000px */
     margin: 0 auto;                 /* Centrado horizontalmente */
@@ -488,7 +488,7 @@
     width: 100%;                    /* Ancho completo del contenedor padre */
     display: flex;                  /* Activa flexbox para alinear botones */
     justify-content: space-between; /* Distribuye botones en extremos opuestos */
-    transform: translateY(-5%);    /* Mueve hacia arriba 50% para centrado vertical */
+    transform: translateY(-100%);    /* Mueve hacia arriba 50% para centrado vertical */
     padding: 20px;                  /* Espaciado interno de 20px */
 }
 
@@ -506,8 +506,8 @@
     cursor: pointer;                /* Cursor de mano al pasar el mouse */
     transition: all 0.3s ease;      /* Transición suave de 0.3s para todos los cambios */
     /* Sombra: 0px horizontal, 5px vertical, 15px difuminado, 20% opacidad negra */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
 
 /* 
  * Estado hover de los botones de navegación
@@ -524,8 +524,9 @@
  * Se centra debajo del carousel
  */
 .carousel-indicators {
+    position: relative;
     text-align: center;             /* Centra los indicadores horizontalmente */
-    margin-top: 30px;               /* Espacio superior de 30px */
+    margin-top: -45px;               /* Espacio superior de 30px */
 }
 
 /* 
@@ -547,7 +548,7 @@
  * Estado activo del indicador
  * Se aplica al indicador que corresponde al slide actual
  */
-        .indicator.active {
+.indicator.active {
     background: #000000;            /* Fondo verde italiano */
     width: 30px;                    /* Ancho expandido de 30px */
     border-radius: 5px;             /* Forma rectangular redondeada */
