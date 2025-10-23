@@ -7,6 +7,7 @@ let totalSlides: number;
 let carousel: HTMLElement | null;
 let indicatorsContainer: HTMLElement | null;
 let indicators: NodeListOf<Element>;
+let isTransitioning = false; // FLAG PARA PREVENIR CLICS MÚLTIPLES
 
 // INICIALIZACIÓN DEL CAROUSEL
 function initCarousel() {
@@ -21,51 +22,107 @@ function initCarousel() {
     }
 
     // CREACIÓN DINÁMICA DE INDICADORES
-    indicatorsContainer.innerHTML = ''; // Limpiar indicadores existentes
+    indicatorsContainer.innerHTML = '';
     for (let i = 0; i < totalSlides; i++) {
         const indicator = document.createElement('span');
         indicator.className = 'indicator';
-        if (i === 0) indicator.classList.add('active'); // Primer indicador activo
+        if (i === 0) indicator.classList.add('active');
         indicator.onclick = () => goToSlide(i);
         indicatorsContainer.appendChild(indicator);
     }
 
     indicators = document.querySelectorAll('.indicator');
     
+    // PRECARGAR VIDEOS PARA MEJOR RENDIMIENTO
+    preloadVideos();
+}
+
+// PRECARGAR VIDEOS
+function preloadVideos() {
+    const videos = document.querySelectorAll('.carousel-item video');
+    videos.forEach((video) => {
+        (video as HTMLVideoElement).preload = 'auto';
+    });
 }
 
 // ACTUALIZACIÓN VISUAL DEL CAROUSEL
 function updateCarousel() {
     if (!carousel || !indicators) return;
     
-    carousel.style.transform = `translateX(-${currentSlide * 100}%)`; // Desplazamiento horizontal
+    // Desplazamiento horizontal con translate3d para aceleración GPU
+    carousel.style.transform = `translate3d(-${currentSlide * 100}%, 0, 0)`;
+    
+    // Actualiza indicadores activos
     indicators.forEach((indicator, index) => {
-        indicator.classList.toggle('active', index === currentSlide); // Actualiza indicadores activos
+        indicator.classList.toggle('active', index === currentSlide);
+    });
+    
+    // GESTIÓN DE VIDEOS: Reproducir solo el actual, pausar los demás
+    manageVideos();
+}
+
+// GESTIÓN DE REPRODUCCIÓN DE VIDEOS
+function manageVideos() {
+    const videos = document.querySelectorAll('.carousel-item video');
+    videos.forEach((video, index) => {
+        const videoElement = video as HTMLVideoElement;
+        if (index === currentSlide) {
+            videoElement.play().catch(e => console.log('Video autoplay prevented:', e));
+        } else {
+            videoElement.pause();
+            videoElement.currentTime = 0; // Reiniciar video cuando no está visible
+        }
     });
 }
 
-// NAVEGACIÓN DEL CAROUSEL
+// NAVEGACIÓN DEL CAROUSEL CON PROTECCIÓN ANTI-LAG
 function nextSlide() {
-    if (totalSlides === 0) return;
-    currentSlide = (currentSlide + 1) % totalSlides; // Avanza cíclicamente
+    if (totalSlides === 0 || isTransitioning) return; // PREVENIR CLICS DURANTE TRANSICIÓN
+    
+    isTransitioning = true;
+    currentSlide = (currentSlide + 1) % totalSlides;
     updateCarousel();
-    restartAutoAdvance(); // Reiniciar auto-avance al navegar manualmente
+    
+    // LIBERAR DESPUÉS DE LA TRANSICIÓN (400ms = duración del CSS)
+    setTimeout(() => {
+        isTransitioning = false;
+    }, 100);
+    
+    restartAutoAdvance();
 }
 
 function prevSlide() {
-    if (totalSlides === 0) return;
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; // Retrocede cíclicamente
+    if (totalSlides === 0 || isTransitioning) return; // PREVENIR CLICS DURANTE TRANSICIÓN
+    
+    isTransitioning = true;
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
     updateCarousel();
-    restartAutoAdvance(); // Reiniciar auto-avance al navegar manualmente
+    
+    // LIBERAR DESPUÉS DE LA TRANSICIÓN (400ms = duración del CSS)
+    setTimeout(() => {
+        isTransitioning = false;
+    }, 400);
+    
+    restartAutoAdvance();
 }
 
 function goToSlide(index: number) {
-    if (totalSlides === 0 || index < 0 || index >= totalSlides) return;
+    if (totalSlides === 0 || index < 0 || index >= totalSlides || isTransitioning) return;
+    
+    // No hacer nada si ya estamos en ese slide
+    if (index === currentSlide) return;
+    
+    isTransitioning = true;
     currentSlide = index;
     updateCarousel();
-    restartAutoAdvance(); // Reiniciar auto-avance al navegar manualmente
+    
+    // LIBERAR DESPUÉS DE LA TRANSICIÓN (400ms = duración del CSS)
+    setTimeout(() => {
+        isTransitioning = false;
+    }, 400);
+    
+    restartAutoAdvance();
 }
-
 
 function restartAutoAdvance() {
     // Función placeholder - el auto-avance fue removido por el usuario
@@ -85,14 +142,14 @@ if (scrollIndicator) {
 
 // INTERSECTION OBSERVER PARA ANIMACIONES SCROLL-TRIGGERED
 const observerOptions = {
-    threshold: 0.1, // Se activa cuando el 10% del elemento es visible
-    rootMargin: '0px 0px -100px 0px' // Margen negativo para activar antes
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            (entry.target as HTMLElement).style.animation = 'fadeInUp 1s ease forwards'; // Aplica animación
+            (entry.target as HTMLElement).style.animation = 'fadeInUp 1s ease forwards';
         }
     });
 }, observerOptions);
@@ -100,7 +157,7 @@ const observer = new IntersectionObserver((entries) => {
 // APLICA EL OBSERVER A TODAS LAS TARJETAS DE CULTURA
 function initCultureCards() {
     document.querySelectorAll('.culture-card').forEach(card => {
-        (card as HTMLElement).style.opacity = '0'; // Inicialmente ocultas
+        (card as HTMLElement).style.opacity = '0';
         observer.observe(card);
     });
 }
@@ -111,14 +168,12 @@ function initNavbar() {
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
 
-    // Toggle del menú móvil
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             navToggle.classList.toggle('active');
         });
 
-        // Cerrar menú al hacer clic en un enlace
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
@@ -126,7 +181,6 @@ function initNavbar() {
             });
         });
 
-        // Cerrar menú al hacer clic fuera de él
         document.addEventListener('click', (e) => {
             const target = e.target as Element;
             if (!target.closest('.navbar')) {
@@ -135,6 +189,67 @@ function initNavbar() {
             }
         });
     }
+}
+
+// ATAJOS DE TECLADO PARA NAVEGACIÓN
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+        prevSlide();
+    } else if (e.key === 'ArrowRight') {
+        nextSlide();
+    }
+});
+
+// SOPORTE PARA GESTOS TÁCTILES EN MÓVILES
+let touchStartX = 0;
+let touchEndX = 0;
+let touchStartY = 0;
+let touchEndY = 0;
+
+function initTouchGestures() {
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (!carouselContainer) return;
+
+    carouselContainer.addEventListener('touchstart', (e: Event) => {
+        const touchEvent = e as TouchEvent;
+        touchStartX = touchEvent.touches[0].clientX;
+        touchStartY = touchEvent.touches[0].clientY;
+    }, { passive: true });
+
+    carouselContainer.addEventListener('touchmove', (e: Event) => {
+        const touchEvent = e as TouchEvent;
+        touchEndX = touchEvent.touches[0].clientX;
+        touchEndY = touchEvent.touches[0].clientY;
+    }, { passive: true });
+
+    carouselContainer.addEventListener('touchend', () => {
+        handleSwipe();
+    });
+}
+
+function handleSwipe() {
+    const swipeThreshold = 50; // Mínimo de píxeles para considerar un swipe
+    const horizontalDistance = touchStartX - touchEndX;
+    const verticalDistance = Math.abs(touchStartY - touchEndY);
+    
+    // Verificar que el swipe sea más horizontal que vertical
+    if (Math.abs(horizontalDistance) > verticalDistance) {
+        if (Math.abs(horizontalDistance) > swipeThreshold) {
+            if (horizontalDistance > 0) {
+                // Swipe hacia la izquierda - siguiente slide
+                nextSlide();
+            } else {
+                // Swipe hacia la derecha - slide anterior
+                prevSlide();
+            }
+        }
+    }
+    
+    // Reset
+    touchStartX = 0;
+    touchEndX = 0;
+    touchStartY = 0;
+    touchEndY = 0;
 }
 
 // HACER LAS FUNCIONES GLOBALES PARA ACCESO DESDE HTML
@@ -147,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavbar();
     initCarousel();
     initCultureCards();
+    initTouchGestures(); // INICIALIZAR GESTOS TÁCTILES
 });
 
 // También inicializar inmediatamente por si el DOM ya está listo
@@ -157,4 +273,5 @@ if (document.readyState === 'loading') {
     initNavbar();
     initCarousel();
     initCultureCards();
+    initTouchGestures(); // INICIALIZAR GESTOS TÁCTILES
 }

@@ -17,7 +17,7 @@
  * Configuración base del elemento body
  * Define la tipografía, colores y fondo principal de toda la página
  */
-        body {
+body {
     font-family: 'Georgia', serif;    /* Fuente serif elegante para el texto */
     overflow-x: hidden;               /* Previene el scroll horizontal no deseado */
     color: #333;                      /* Color de texto principal (gris oscuro) */
@@ -26,8 +26,8 @@
      * Verde (#009246) -> Blanco (#fff) -> Rojo (#ce2b37)
      * Se extiende de izquierda a derecha en toda la página
      */
-            background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
-        }
+    background: linear-gradient(to right, #009246 0%, #fff 50%, #ce2b37 100%);
+}
 
 /* ========================================== */
 /* NAVIGATION BAR - Barra de navegación superior */
@@ -228,8 +228,8 @@
  * Complementa al título principal
  */
 .hero p {
-    font-size: 2.5rem;                          /* Tamaño de fuente grande (40px) */
-    color: #000000;                             /* Color negro puro */
+    font-size: 2.5rem;                             /* Tamaño de fuente grande (40px) */
+    color: #000000, #009246, #ce2b37;                             /* Color negro puro */
     text-shadow: 2px 2px 5px rgba(0,0,0,0.3);  /* Sombra de texto más sutil que el título */
     font-style: italic;                         /* Texto en cursiva */
 }
@@ -242,8 +242,8 @@
  * Animación de aparición desde abajo
  * Se aplica al contenido del hero cuando la página se carga
  */
-        @keyframes fadeInUp {
-            from {
+@keyframes fadeInUp {
+    from {
         opacity: 0;                    /* Comienza completamente transparente */
         transform: translateY(30px);   /* Comienza 30px más abajo de su posición final */
     }
@@ -384,11 +384,11 @@
  * Contenedor de todos los slides del carousel
  * Usa flexbox para alinear los slides horizontalmente
  */
-        .carousel {
+.carousel {
     display: flex;                  /* Activa flexbox para alineación horizontal */
     /* Transición suave personalizada: 0.8s de duración, curva de animación personalizada */
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+}
 
 /* 
  * Cada slide individual del carousel
@@ -419,7 +419,7 @@
  * Imágenes dentro de los slides (si las hay)
  * Estilos alternativos para cuando se usen imágenes en lugar de videos
  */
-        .carousel-item img {
+.carousel-item img {
     width: 500%;                    /* Ancho completo del slide */
     height: 500%;                   /* Altura completa del slide */
     object-fit: cover;              /* Ajusta la imagen sin distorsión, recortando si es necesario */
@@ -429,7 +429,7 @@
  * Contenedor del texto descriptivo de cada slide
  * Aparece en la parte inferior con un fondo degradado
  */
-        .carousel-caption {
+.carousel-caption {
     position: absolute;             /* Posicionamiento absoluto respecto al carousel-item */
     bottom: 0;                      /* Pegado a la parte inferior del slide */
     left: 0;                        /* Pegado a la parte izquierda */
@@ -452,15 +452,15 @@
 /* 
  * Título dentro del caption (nombre de la ciudad)
  */
-        .carousel-caption h3 {
+.carousel-caption h3 {
     font-size: 2rem;                /* Tamaño de fuente grande (32px) */
     margin-bottom: 10px;            /* Espacio inferior de 10px */
-        }
+}
 
 /* 
  * Párrafo dentro del caption (descripción de la ciudad)
  */
-        .carousel-caption p {
+.carousel-caption p {
     font-size: 1.1rem;              /* Tamaño de fuente ligeramente mayor al normal (17.6px) */
 }
 
