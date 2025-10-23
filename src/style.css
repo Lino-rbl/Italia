@@ -330,16 +330,16 @@
  * Sección completa que contiene el carousel de videos
  * Tiene padding para separación de otras secciones
  */
-        .carousel-section {
+.carousel-section {
     padding: 80px 20px;             /* 80px arriba/abajo, 20px izquierda/derecha */
     background: #ffffff00;          /* Fondo transparente (hex con alpha 00) */
-        }
+}
 
 /* 
  * Título principal de la sección del carousel
  * "Beauty of Italy"
  */
-        .carousel-section h2 {
+.carousel-section h2 {
     text-align: center;             /* Centrado horizontalmente */
     font-size: 3rem;                /* Tamaño de fuente grande (48px) */
     margin-bottom: 50px;            /* Espacio inferior de 50px */
@@ -354,7 +354,7 @@
  * Línea decorativa que aparece debajo del título
  * Usa los colores de la bandera italiana
  */
-        .carousel-section h2::after {
+.carousel-section h2::after {
     content: '';                    /* Crea un elemento vacío */
     position: absolute;             /* Posicionamiento absoluto respecto al h2 */
     bottom: -10px;                  /* 10px debajo del texto del título */
@@ -370,8 +370,8 @@
  * Contenedor principal que envuelve todo el carousel
  * Define el área visible y las sombras
  */
-        .carousel-container {
-    max-width: 2000px;              /* Ancho máximo de 2000px */
+.carousel-container {
+    max-width: 500px;              /* Ancho máximo de 2000px */
     margin: 0 auto;                 /* Centrado horizontalmente */
     position: relative;             /* Permite posicionamiento absoluto de controles */
     overflow: hidden;               /* Oculta slides que están fuera del área visible */
@@ -394,9 +394,9 @@
  * Cada slide individual del carousel
  * Contiene un video y su caption correspondiente
  */
-        .carousel-item {
+.carousel-item {
     min-width: 100%;                /* Cada slide ocupa exactamente el 100% del contenedor */
-    height: 600px;                  /* Altura fija de 600px */
+    height: 889px;                  /* Altura fija de 600px */
     position: relative;             /* Permite posicionamiento absoluto del video y caption */
     overflow: hidden;               /* Oculta cualquier contenido que se salga */
 }
@@ -445,9 +445,9 @@
 /* 
  * Estado hover del caption - muestra el texto cuando se pasa el mouse
  */
-        .carousel-item:hover .carousel-caption {
+.carousel-item:hover .carousel-caption {
     transform: translateY(0);       /* Mueve el caption a su posición normal (visible) */
-        }
+}
 
 /* 
  * Título dentro del caption (nombre de la ciudad)
@@ -950,19 +950,24 @@
  * Pantallas de 1200px o más de ancho
  */
 @media (min-width: 1200px) {
-.carousel-item {
-    height: 700px;              /* Altura mayor para pantallas grandes (700px) */
-}
-    
-.carousel-item video {
-    width: 100%;                /* Ancho completo del slide */
-    height: 100%;               /* Altura completa del slide */
-}
-    
-.tower-container-1,
-.tower-container-2 {
-    width: 200px;               /* Imágenes más grandes en pantallas grandes */
-    height: 200px;              /* Imágenes más grandes en pantallas grandes */
+    .carousel-container {
+        max-width: 600px;
+    }
+
+    .carousel-item {
+        height: 1067px;              /* Altura mayor para pantallas grandes (700px) */
+    }
+        
+    .carousel-item video {
+        width: 100%;                /* Ancho completo del slide */
+        height: 100%;               /* Altura completa del slide */
+        object-fit: cover;
+    }
+        
+    .tower-container-1,
+    .tower-container-2 {
+        width: 200px;               /* Imágenes más grandes en pantallas grandes */
+        height: 200px;              /* Imágenes más grandes en pantallas grandes */
     }
 }
 
@@ -970,8 +975,8 @@
  * Tablets y dispositivos medianos
  * Pantallas de 768px o menos de ancho
  */
-        @media (max-width: 768px) {
-    /* Ajustes de la navbar para tablets */
+@media (max-width: 768px) {
+        /* Ajustes de la navbar para tablets */
     .nav-menu {
         position: fixed;                /* Posición fija para el menú móvil */
         left: -100%;                   /* Inicialmente oculto a la izquierda */
@@ -1005,7 +1010,7 @@
         display: flex;                 /* Muestra el botón hamburguesa */
     }
 
-    /* Asegurar que el menú móvil funcione correctamente */
+        /* Asegurar que el menú móvil funcione correctamente */
     .nav-menu {
         position: fixed !important;    /* Fuerza posición fija */
         left: -100% !important;        /* Fuerza posición oculta */
@@ -1025,15 +1030,15 @@
     .nav-menu.active {
         left: 0 !important;            /* Muestra el menú cuando está activo */
     }
-            .hero h1 {
+    .hero h1 {
         font-size: 3.5rem;          /* Título más pequeño en tablets (56px) */
-            }
+    }
 
-            .hero p {
+    .hero p {
         font-size: 1.3rem;          /* Subtítulo más pequeño en tablets (20.8px) */
-            }
+        }
 
-            .tower-container {
+    .tower-container {
         right: 5%;                  /* 5% desde la derecha */
         bottom: 15%;                /* 15% desde la parte inferior */
         transform: rotate(4deg) scale(0.7); /* Rotación de 4° y escala de 70% */
@@ -1047,49 +1052,53 @@
 
     .hero-images-container {
         gap: 20px;                  /* Espacio reducido entre imágenes en tablets */
-            }
-
-            .carousel-item {
-        height: 400px;              /* Altura reducida del carousel en tablets (400px) */
     }
     
+    .carousel-container {
+        max-width: 90%;
+    }
+
+    .carousel-item {
+        height: calc(90vw * 16 / 9);             /* Altura reducida del carousel en tablets (400px) */
+    }
+        
     .carousel-item video {
         width: 100%;                /* Ancho completo del slide */
         height: 100%;               /* Altura completa del slide */
         object-fit: cover;          /* Ajusta el video manteniendo proporción */
-            }
+    }
 
-            .carousel-caption h3 {
+    .carousel-caption h3 {
         font-size: 1.5rem;          /* Título del caption más pequeño (24px) */
-            }
+    }
 
-            .carousel-caption p {
+    .carousel-caption p {
         font-size: 0.95rem;         /* Párrafo del caption más pequeño (15.2px) */
-            }
+    }
 
-            .culture-header h2 {
+    .culture-header h2 {
         font-size: 2rem;            /* Título de cultura más pequeño (32px) */
-            }
+    }
 
-            .culture-grid {
+    .culture-grid {
         grid-template-columns: 1fr; /* Una sola columna en tablets */
         gap: 25px;                  /* Espacio reducido entre tarjetas (25px) */
-            }
+    }
 
-            .culture-card {
+    .culture-card {
         padding: 30px;              /* Padding reducido en tarjetas (30px) */
-            }
+    }
 
-            .footer-tagline {
+    .footer-tagline {
         font-size: 1.2rem;          /* Lema del footer más pequeño (19.2px) */
-            }
+    }
 
-            .team-section {
+    .team-section {
         grid-template-columns: 1fr; /* Una sola columna para el equipo */
         gap: 20px;                  /* Espacio de 20px entre miembros */
-            }
+    }
 
-            .carousel-btn {
+    .carousel-btn {
         width: 40px;                /* Botones más pequeños (40px) */
         height: 40px;               /* Botones más pequeños (40px) */
         font-size: 1.2rem;          /* Texto de botones más pequeño (19.2px) */
@@ -1100,16 +1109,16 @@
  * Dispositivos móviles pequeños
  * Pantallas de 480px o menos de ancho
  */
-        @media (max-width: 480px) {
-            .hero h1 {
+@media (max-width: 480px) {
+    .hero h1 {
         font-size: 2.5rem;          /* Título aún más pequeño en móviles (40px) */
-            }
+    }
 
-            .hero p {
+    .hero p {
         font-size: 1rem;            /* Subtítulo más pequeño en móviles (16px) */
-            }
+    }
 
-            .tower-container {
+    .tower-container {
         transform: rotate(4deg) scale(0.5); /* Rotación de 4° y escala de 50% */
         right: 2%;                  /* 2% desde la derecha */
         bottom: 18%;                /* 18% desde la parte inferior */
@@ -1126,8 +1135,12 @@
         flex-direction: column;     /* Apila las imágenes verticalmente en móviles muy pequeños */
     }
 
+    .carousel-container {
+        max-width: 95%;
+    }
+
     .carousel-item {
-        height: 300px;              /* Altura aún más reducida para móviles (300px) */
+        height: calc(95vw * 16 / 9);             /* Altura aún más reducida para móviles (300px) */
     }
     
     .carousel-item video {
